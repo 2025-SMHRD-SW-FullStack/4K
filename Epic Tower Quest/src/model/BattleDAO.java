@@ -128,7 +128,7 @@ public class BattleDAO {
 			psmt.setString(8, dto.getId());
 
 			result = psmt.executeUpdate();
-			System.out.println(result);
+
 
 		} catch (SQLException e) {
 			e.printStackTrace();
