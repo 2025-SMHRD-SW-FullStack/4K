@@ -6,6 +6,14 @@ public class StartCharDTO {
 	private int CHAR_DEF; // 방어력
 	private String PERKS; // 특수능력
 	
+	public StartCharDTO(String cHAR_NAME, int cHAR_ATK, int cHAR_DEF, String pERKS) {
+		super();
+		CHAR_NAME = cHAR_NAME;
+		CHAR_ATK = cHAR_ATK;
+		CHAR_DEF = cHAR_DEF;
+		PERKS = pERKS;
+	}
+
 	public String getCHAR_NAME() {
 		return CHAR_NAME;
 	}

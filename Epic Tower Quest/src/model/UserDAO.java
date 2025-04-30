@@ -16,9 +16,9 @@ public class UserDAO {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 
-			String url = "jdbc:oracle:thin:@localhost:1521:xe";
-			String userName = "DCL_USER";
-			String pw = "12345";
+			String url = "jdbc:oracle:thin:@project-db-campus.smhrd.com:1524:xe";
+			String userName = "campus_25SW_FS_p1_2";
+			String pw = "smhrd2";
 
 			conn = DriverManager.getConnection(url, userName, pw);
 
