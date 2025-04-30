@@ -9,10 +9,22 @@ public class TopDTO {
 	private String EVENT;  // 이벤트(Y/N)
 	private int TOP_EXP; // 클리어시 받는 경험치
 	
+	public TopDTO(String mON_NAME, int mON_ATK, int mON_DEF, int mON_HP, int dROP_GOLD, String eVENT, int tOP_EXP) {
+		super();
+		MON_NAME = mON_NAME;
+		MON_ATK = mON_ATK;
+		MON_DEF = mON_DEF;
+		MON_HP = mON_HP;
+		DROP_GOLD = dROP_GOLD;
+		EVENT = eVENT;
+		TOP_EXP = tOP_EXP;
+	}
+
 	public String getMON_NAME() {
 		return MON_NAME;
 	}
 	
+
 	public void setMON_NAME(String mON_NAME) {
 		MON_NAME = mON_NAME;
 	}

@@ -5,6 +5,13 @@ public class Top_RankDTO {
 	private String CHAR_NAME; // 캐릭터 이름
 	private int MAX_FLOOR; // 최대 층수
 	
+	public Top_RankDTO(String nICKNAME, String cHAR_NAME, int mAX_FLOOR) {
+		super();
+		NICKNAME = nICKNAME;
+		CHAR_NAME = cHAR_NAME;
+		MAX_FLOOR = mAX_FLOOR;
+	}
+
 	public String getNICKNAME() {
 		return NICKNAME;
 	}
