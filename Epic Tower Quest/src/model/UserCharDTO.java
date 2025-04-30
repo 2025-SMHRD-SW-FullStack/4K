@@ -9,6 +9,7 @@ public class UserCharDTO {
 	private int USER_ATK; // 유저 캐릭터 공격력
 	private int USER_DEF; // 유저 캐릭터 방어력
 	private int USER_HP; // 유저 캐릭터 체력
+	private int NOW_HP; // 유저 현재 체력
 	private int WEAPON; // 무기 강화수치
 	private int ARMOR; // 방어구 강화수치
 	
