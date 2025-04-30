@@ -28,41 +28,6 @@ public class UserCharDTO {
 		WEAPON = wEAPON;
 		ARMOR = aRMOR;
 	}
-	
-	
-
-
-
-
-
-
-
-
-
-	public UserCharDTO(String iD, String cHAR_NAME, int lEV, int eXP, int gOLD_HELD, int uSER_ATK, int uSER_DEF,
-			int uSER_HP, int nOW_HP) {
-		super();
-		ID = iD;
-		CHAR_NAME = cHAR_NAME;
-		LEV = lEV;
-		EXP = eXP;
-		GOLD_HELD = gOLD_HELD;
-		USER_ATK = uSER_ATK;
-		USER_DEF = uSER_DEF;
-		USER_HP = uSER_HP;
-		NOW_HP = nOW_HP;
-	}
-
-
-
-
-
-
-
-
-
-
-
 	public UserCharDTO() {
 		
 	}

@@ -4,7 +4,6 @@ public class UserDTO {
 	private String ID;
 	private String PW;
 	private String NICKNAME;
-	private int seqNum;
 
 	public String getID() {
 		return ID;
@@ -30,14 +29,4 @@ public class UserDTO {
 		NICKNAME = nICKNAME;
 	}
 
-	public int getSeqNum() {
-		return seqNum;
-	}
-
-	public void setSeqNum(int seqNum) {
-		this.seqNum = seqNum;
-	}
-	
-	
-	
 }
