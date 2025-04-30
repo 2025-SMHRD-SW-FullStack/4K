@@ -1,6 +1,7 @@
 package model;
 
 public class TopDTO {
+	private int FLOOR; // 층수
 	private String MON_NAME; // 몬스터 이름
 	private int MON_ATK; // 몬스터 공격력
 	private int MON_DEF; // 몬스터 방어력
@@ -9,8 +10,11 @@ public class TopDTO {
 	private String EVENT;  // 이벤트(Y/N)
 	private int TOP_EXP; // 클리어시 받는 경험치
 	
-	public TopDTO(String mON_NAME, int mON_ATK, int mON_DEF, int mON_HP, int dROP_GOLD, String eVENT, int tOP_EXP) {
+	
+	public TopDTO(int fLOOR, String mON_NAME, int mON_ATK, int mON_DEF, int mON_HP, int dROP_GOLD, String eVENT,
+			int tOP_EXP) {
 		super();
+		FLOOR = fLOOR;
 		MON_NAME = mON_NAME;
 		MON_ATK = mON_ATK;
 		MON_DEF = mON_DEF;
@@ -19,6 +23,18 @@ public class TopDTO {
 		EVENT = eVENT;
 		TOP_EXP = tOP_EXP;
 	}
+
+	public int getFLOOR() {
+		return FLOOR;
+	}
+
+
+	public void setFLOOR(int fLOOR) {
+		FLOOR = fLOOR;
+	}
+
+
+
 
 	public String getMON_NAME() {
 		return MON_NAME;
