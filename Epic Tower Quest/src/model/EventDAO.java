@@ -80,7 +80,7 @@ public class EventDAO {
 	public void curseGoldNowHpSql(int hp,int gold) {
 		boolean check =false;
 		int result = 0;
-		String sql = "UPDATE USER_CHAR SET USER_NOWHP = ? AND GOLD_HELD = ? WHERE ID = ?";
+		String sql = "UPDATE USER_CHAR SET USER_NOWHP = ? , GOLD_HELD = ? WHERE ID = ?";
 		try {
 			getConn();
 			psmt = conn.prepareStatement(sql);
@@ -101,7 +101,7 @@ public class EventDAO {
 	public void curseGoldMaxHpSql(int maxHP,int gold) {
 		boolean check = false;
 		int result = 0;
-		String sql = "UPDATE USER_CHAR SET USER_HP =  ? AND GOLD_HELD = ? WHERE ID = ?";
+		String sql = "UPDATE USER_CHAR SET USER_HP =  ? , GOLD_HELD = ? WHERE ID = ?";
 		try {
 			getConn();
 			psmt = conn.prepareStatement(sql);
@@ -277,6 +277,51 @@ public class EventDAO {
 			else {
 				System.out.println("방어력 증가 이벤트 오류");
 				check =false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			getclose();
+		}
+	}
+	
+	// 방어력 낮추고 공격력 올리기
+	public void subDefAddAtkSql(int def,int atk) {
+		boolean check = false;
+		int result = 0;
+		String sql = "UPDATE USER_CHAR SET USER_DEF = ?,USER_ATK = ? WHERE ID = ?";
+		try {
+			getConn();
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, uDto.getUSER_DEF() - def);
+			psmt.setInt(2, uDto.getUSER_ATK() + atk);
+			psmt.setString(3, uDto.getID());
+			if(result > 0) check = true;
+			else {
+				System.out.println("방어력 낮추고 공격력 올리기 이벤트 오류");
+				check = false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			getclose();
+		}
+	}
+	
+	// 최대 체력 낮추고 공격력 올리기
+	public void subMaxHpAddAtkSql(int hp, int atk) {
+		boolean check =false;
+		int result = 0;
+		String sql = "UPDATE USER_CHAR SET USER_HP = ?, USER_ATK = ? WHERE ID = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, uDto.getUSER_HP() - hp);
+			psmt.setInt(2, uDto.getUSER_ATK() + atk);
+			psmt.setString(3, uDto.getID());
+			if(result > 0) check = true;
+			else {
+				System.out.println("최대 체력 낮추고 공격력 올리기 이벤트 오류");
+				check = false;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
