@@ -6,11 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserDAO {
-
+public class EventDAO {
 	private Connection conn = null;
 	private PreparedStatement psmt = null;
 	private ResultSet rs = null;
+	UserCharDTO uDto = new UserCharDTO();
 	
 	private void getConn() {
 		try {
@@ -34,7 +34,6 @@ public class UserDAO {
 
 	// 사용한 자원을 반납하는 메소드
 	private void getclose() {
-
 		try {
 			if(rs != null)
 				rs.close();
@@ -51,84 +50,65 @@ public class UserDAO {
 		
 	}
 	
-	
-	public int join(String user_ID, String user_PW, String NICKNAME) {
-		
+	// 50골드 추가 이벤트
+	public void addGoldSql() {
+		boolean check = false;
 		int result = 0;
+		String sql = "UPDATE USER_CHAR SET GOLD_HELD GOLD_HELD+50 WHERE ID=?";
 		
 		try {
-			
-			getConn();
-			
-			String sql = "INSERT INTO USER_TABLE VALUES (USER_SEQ.NEXTVAL,?,?,?)";
-
-			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, user_ID);
-			psmt.setString(2, user_PW);
-			psmt.setString(3, NICKNAME);
-
+			psmt=conn.prepareStatement(sql);
+			psmt.setString(1, uDto.getID());
 			result = psmt.executeUpdate();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		finally {
-			getclose();
-		}
-		return result;
-	}
-	
-	public UserDTO login(String user_ID, String user_PW) {
-		UserDTO dto = null;
-		
-		try {
-			getConn();
-
-			String sql = "SELECT * FROM USER_TABLE WHERE ID = ? AND PW = ?";
-
-			psmt = conn.prepareStatement(sql);
-
-			psmt.setString(1, user_ID);
-			psmt.setString(2, user_PW);
-			rs = psmt.executeQuery();
-
-			if (rs.next()) {
-				dto = new UserDTO();
-				dto.setID(rs.getString("ID"));
-				dto.setNICKNAME(rs.getString("nickname"));
+			if(result > 0) {
+				check = true;
+			}else {
+				check = false;
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
+		}finally {
 			getclose();
 		}
-		return dto;
+		
 	}
-
-	public int deleteMember(String user_ID, String user_PW) {
+	
+	// 리스크있는 골드 획득 이벤트
+	public boolean curseGoldSql(int maxHP) {
+		boolean check = false;
 		int result = 0;
-
+		String sql = "UPDATE USER_CHAR SET USER_HP =  ? WHERE ID = ?";
 		try {
-			getConn();
-
-			String sql = "DELETE FROM USER_TABLE WHERE ID = ? AND PW = ?";
-
 			psmt = conn.prepareStatement(sql);
-
-			psmt.setString(1, user_ID);
-			psmt.setString(2, user_PW);
-
+			psmt.setInt(1, maxHP);
+			psmt.setString(2,uDto.getID());
 			result = psmt.executeUpdate();
-
-		}  catch (SQLException e) {
+			if(result > 0) check = true;
+			else check = false;
+		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
+		}finally {
 			getclose();
 		}
-		return result;
+		return check;
 	}
 	
+	public void addMaxHpSql(int hp) {
+		boolean check = false;
+		int result = 0;
+		String sql = "UPDATE USER_CHAR SET USER_HP = ? WHERE ID + ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, hp);
+			psmt.setString(2,uDto.getID());
+			result = psmt.executeUpdate();
+			if(result > 0) check = true;
+			else check = false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			getclose();
+		}
 	}
 	
+}
