@@ -5,29 +5,36 @@ import java.util.Scanner;
 import model.BattleDAO;
 import model.BattleDTO;
 import model.TopDTO;
+import model.Top_RankDTO;
 import model.UserCharDTO;
 import model.UserDTO;
 
 
 public class Battle {
 	
-	public void floorCheck(String id) {
+	public void floorCheck(String id,String nick) {
 		int floor = 1;
 		BattleDAO btDao = new BattleDAO();
 		
 		while(true) {
 			UserCharDTO userDto = btDao.userCharDto(id) ;
-			boolean bt = battle(userDto, floor);
-			floor++;
-			if (!bt) {
-				break;
+			if(floor%5==0) {
+				System.out.println("이벤트 더미");
+				floor++;
+			}else {
+				
+				boolean bt = battle(userDto,nick, floor);
+				floor++;
+				if (!bt) {
+					break;
+				}
 			}
 		}
-		 
+		
 	}
 	
 	
-	public boolean battle(UserCharDTO userDto, int floor) {
+	public boolean battle(UserCharDTO userDto, String nick, int floor) {
 		
 		Scanner sc = new Scanner(System.in);
 		
@@ -51,7 +58,7 @@ public class Battle {
 		String mon_name = topDto.getMON_NAME();
 		int user_atk = userDto.getUSER_ATK();
 		int user_def = userDto.getUSER_DEF();
-		int user_now_hp = userDto.getUSER_HP();
+		int user_now_hp = userDto.getNOW_HP();
 		int user_hp = userDto.getUSER_HP();
 		int user_level = userDto.getLEV();
 		int user_exp = userDto.getEXP();
@@ -64,6 +71,12 @@ public class Battle {
 		int mon_gold = topDto.getDROP_GOLD();
 		
 		boolean user_win = true;
+		if(floor>20) {
+			Top_RankDTO TRdto = new Top_RankDTO(nick, user_name , floor);
+			btDao.rankUpdate(TRdto);
+			System.out.println("탑의 꼭대기에 올랐습니다.");
+			System.out.println("당신이 찾던 것이 저 앞에 있습니다-");
+		}
 		System.out.println("현재 층 : "+floor+"층");
 		System.out.println("전투 시작!");
 		while (true) {
@@ -141,12 +154,15 @@ public class Battle {
 			System.out.println("전투에 승리했습니다.");
 			//전투 승리 이후에 경험치 얻고 레벨업하면 캐릭터 스텟 변동 시켜준 이후에 저장
 			user_exp=user_exp+mon_exp;
+			System.out.println("현재 경험치 "+user_exp);
 			user_gold = user_gold+mon_gold;
 			int levelUp=user_exp/(user_level*100);
 			if(levelUp>=1) {
 				user_exp=user_exp-(user_level*100);
 				for (int i = 1; i <= levelUp; i++) {					
 					user_level++;
+					user_hp+=5;
+					user_now_hp+=5;
 					user_atk++;
 					user_def++;
 				}
@@ -154,14 +170,19 @@ public class Battle {
 			
 			// 배틀 dto에 실어서 보내야하는것
 			// 아이디, 레벨, 현재체력, 공격력, 방어력, 골드
-			BattleDTO btEndDto = new BattleDTO(id, user_now_hp, user_atk, user_def, user_gold);
-			System.out.println(btEndDto.toString());
+			BattleDTO btEndDto = new BattleDTO(id,user_hp, user_now_hp,user_level,user_exp, user_atk, user_def, user_gold);
 			btDao.battleEndUpdate(btEndDto);
+			
 			
 			return true;
 			
 		}else {
-			System.out.println("전투에 패배했습니다. 랭킹을 등록합니다");
+			System.out.println("전투에 패배했습니다. 1층으로 돌아갑니다.");
+			System.out.println("탑의 비석에 당신의 기록이 새겨졌습니다.");
+			btDao.battleLoseUpdate(id, user_hp);
+			Top_RankDTO TRdto = new Top_RankDTO(nick, user_name , floor);
+			btDao.rankUpdate(TRdto);
+			
 			
 			return false;
 		}
