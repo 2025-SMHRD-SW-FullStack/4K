@@ -30,9 +30,17 @@ public class UserCharDTO {
 	}
 	
 	
-	
+
+
+
+
+
+
+
+
+
 	public UserCharDTO(String iD, String cHAR_NAME, int lEV, int eXP, int gOLD_HELD, int uSER_ATK, int uSER_DEF,
-			int uSER_HP, int wEAPON, int aRMOR) {
+			int uSER_HP, int nOW_HP) {
 		super();
 		ID = iD;
 		CHAR_NAME = cHAR_NAME;
@@ -42,9 +50,16 @@ public class UserCharDTO {
 		USER_ATK = uSER_ATK;
 		USER_DEF = uSER_DEF;
 		USER_HP = uSER_HP;
-		WEAPON = wEAPON;
-		ARMOR = aRMOR;
+		NOW_HP = nOW_HP;
 	}
+
+
+
+
+
+
+
+
 
 
 
