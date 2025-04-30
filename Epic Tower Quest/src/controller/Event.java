@@ -7,31 +7,34 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import model.UserCharDTO;
+import model.UserDAO;
 import model.UserDTO;
 
-public class Event {
+
+public class Event extends UserDAO{
 
 	private Connection conn = null;
 	private PreparedStatement psmt = null;
 	private ResultSet rs = null;
 	Scanner sc = new Scanner(System.in);
 
-	private void getConn() {
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			String url = "jdbc:oracle:thin:@localhost:1521:xe";
-			String userName = "DCL_USER";
-			String pw = "12345";
-			conn = DriverManager.getConnection(url, userName, pw);
+//	private void getConn() {
+//		try {
+//			Class.forName("oracle.jdbc.driver.OracleDriver");
+//			String url = "jdbc:oracle:thin:@localhost:1521:xe";
+//			String userName = "DCL_USER";
+//			String pw = "12345";
+//			conn = DriverManager.getConnection(url, userName, pw);
 //			if (conn == null) {
 //				System.out.println("연결 실패");
 //			} else {
 //				System.out.println("연결 성공");
 //			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	private void getclose() {
 
@@ -49,8 +52,7 @@ public class Event {
 	}
 
 	public boolean addGold() {
-		UserDTO dto = new UserDTO();
-		getConn();
+		UserCharDTO dto = new UserCharDTO();
 
 		int result = 0;
 
@@ -61,6 +63,7 @@ public class Event {
 //			psmt.setInt(1, dto.getSeqNum());
 			result = psmt.executeUpdate();
 			if (result > 0) {
+				dto.setGOLD_HELD(dto.getGOLD_HELD()+50);
 				return true;
 			} else {
 				return false;
@@ -75,8 +78,7 @@ public class Event {
 	}
 
 	public void curseGold() {
-		UserDTO dto = new UserDTO();
-		getConn();
+		UserCharDTO dto = new UserCharDTO();
 		int result = 0;
 		int select = 0;
 		boolean goldCheck = false;
@@ -88,10 +90,10 @@ public class Event {
 			select = sc.nextInt();
 
 			if (select == 1) {
-//				if(dto.getHp>10) hpCheck = true;
+//				if(dto.getNOW_HP > 10) hpCheck = true;
 				if(hpCheck) {
 					
-				dto = new UserDTO();
+				dto = new UserCharDTO();
 				String sql = "UPDATE USER_CHAR SET GOLD_HELD GOLD_HELD + 50 WHERE SEQ_NUM=?";
 				try {
 					psmt = conn.prepareStatement(sql);
@@ -134,13 +136,12 @@ public class Event {
 	}
 	
 	public void addHP() {
-		UserDTO dto = new UserDTO();
+		UserCharDTO dto = new UserCharDTO();
 //		dto.setHP(dto.getHP+10);
 	}
 	
 	public void addMaxHP() {
-		UserDTO dto = new UserDTO();
-		getConn();
+		UserCharDTO dto = new UserCharDTO();
 //		String sql = "UPDATE UPDATE USER_CHAR SET "
 	}
 
