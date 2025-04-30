@@ -28,6 +28,9 @@ public class UserCharDTO {
 		WEAPON = wEAPON;
 		ARMOR = aRMOR;
 	}
+	public UserCharDTO() {
+		
+	}
 
 	public String getID() {
 		return ID;
