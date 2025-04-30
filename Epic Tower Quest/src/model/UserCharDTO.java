@@ -92,5 +92,13 @@ public class UserCharDTO {
 	public void setARMOR(int aRMOR) {
 		ARMOR = aRMOR;
 	}
+
+	public int getNOW_HP() {
+		return NOW_HP;
+	}
+
+	public void setNOW_HP(int nOW_HP) {
+		NOW_HP = nOW_HP;
+	}
 	
 }

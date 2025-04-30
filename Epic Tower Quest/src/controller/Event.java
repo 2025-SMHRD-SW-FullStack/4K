@@ -1,148 +1,96 @@
 package controller;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Scanner;
 
+import model.EventDAO;
 import model.UserCharDTO;
-import model.UserDAO;
-import model.UserDTO;
 
+public class Event{
 
-public class Event extends UserDAO{
-
-	private Connection conn = null;
-	private PreparedStatement psmt = null;
-	private ResultSet rs = null;
 	Scanner sc = new Scanner(System.in);
 
-//	private void getConn() {
-//		try {
-//			Class.forName("oracle.jdbc.driver.OracleDriver");
-//			String url = "jdbc:oracle:thin:@localhost:1521:xe";
-//			String userName = "DCL_USER";
-//			String pw = "12345";
-//			conn = DriverManager.getConnection(url, userName, pw);
-//			if (conn == null) {
-//				System.out.println("연결 실패");
-//			} else {
-//				System.out.println("연결 성공");
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+	EventDAO eDao = new EventDAO();
+	UserCharDTO uDto = new UserCharDTO();
 
-	private void getclose() {
-
-		try {
-			if (psmt != null)
-				psmt.close();
-
-			if (conn != null)
-				conn.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
+	// 골드 획득
+	public void addGold() {
+		uDto.setGOLD_HELD(uDto.getGOLD_HELD() + 50);
+		System.out.println("50골드를 획득하였습니다!");
+		System.out.println((uDto.getGOLD_HELD() - 50) + " -> " + uDto.getGOLD_HELD());
 	}
 
-	public boolean addGold() {
-		UserCharDTO dto = new UserCharDTO();
-
-		int result = 0;
-
-		String sql = "UPDATE USER_CHAR SET GOLD_HELD GOLD_HELD+50 WHERE SEQ_NUM=?";
-
-		try {
-			psmt = conn.prepareStatement(sql);
-//			psmt.setInt(1, dto.getSeqNum());
-			result = psmt.executeUpdate();
-			if (result > 0) {
-				dto.setGOLD_HELD(dto.getGOLD_HELD()+50);
-				return true;
-			} else {
-				return false;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			getclose();
-		}
-		return false;
-
-	}
-
+	// 리스크있는 골드 획득
 	public void curseGold() {
-		UserCharDTO dto = new UserCharDTO();
-		int result = 0;
+		UserCharDTO uDto = new UserCharDTO();
 		int select = 0;
-		boolean goldCheck = false;
+		int firstSelGold = 50;
+		int secondSelGold = 100;
+		int firstSelHp = 10;
+		int secondSelHp = 100;
+		boolean maxHpCheck = false;
 		boolean hpCheck = false;
 		while (true) {
 			System.out.println("어느 보상을 받으시겠습니까?");
 			System.out.println("[1] 현재 체력을 10깍고 골드 50을 받는다.");
-			System.out.println("[2] 현재 골드 50을 잃고 최대 체력 20을 올린다.");
+			System.out.println("[2] 최대 체력 10을 깍고 골드 100을 받는다.");
+			System.out.println("[3] 아무것도 선택하지 않는다.");
+
+			if (uDto.getNOW_HP() > 10)
+				hpCheck = true;
+			if (uDto.getUSER_HP() > 10)
+				maxHpCheck = true;
+
 			select = sc.nextInt();
 
 			if (select == 1) {
-//				if(dto.getNOW_HP > 10) hpCheck = true;
-				if(hpCheck) {
-					
-				dto = new UserCharDTO();
-				String sql = "UPDATE USER_CHAR SET GOLD_HELD GOLD_HELD + 50 WHERE SEQ_NUM=?";
-				try {
-					psmt = conn.prepareStatement(sql);
-//					psmt.setInt(1, dto.getSeqNum());
-					result = psmt.executeUpdate();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				} finally {
-					getclose();
-				}
-				break;
-				}
-				else {
+				if (hpCheck) {
+					uDto.setNOW_HP(uDto.getNOW_HP() - firstSelHp);
+					uDto.setGOLD_HELD(uDto.getGOLD_HELD() + firstSelGold);
+					System.out.printf("체력 %d을 읽고 %d골드를 받았습니다! %n", firstSelHp, uDto.getGOLD_HELD());
+					System.out.printf("%d -> %d %n", uDto.getNOW_HP() + firstSelHp, uDto.getNOW_HP());
+					System.out.printf("%d -> %d %n", uDto.getGOLD_HELD() - firstSelGold, uDto.getGOLD_HELD());
+					break;
+				} else {
 					System.out.println("체력이 부족합니다.");
 				}
 			} else if (select == 2) {
-//				if (dto.getGold() >= 200)
-//					goldCheck = true;
-				if (goldCheck) {
-					String sql = "UPDATE USER_CHAR SET GOLD_HELD GOLD_HELD-200 "
-							+ "AND USER_HP USER_HP + 20 WHERE SEQ_NUM = ?";
-					try {
-						psmt = conn.prepareStatement(sql);
-//					psmt.setInt(1, dto.getSeqNum());
-						result = psmt.executeUpdate();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					} finally {
-						getclose();
-					}
+				if (maxHpCheck) {
+					uDto.setUSER_HP(uDto.getUSER_HP() - secondSelHp);
+					eDao.curseGoldSql(uDto.getUSER_HP());
+					if (uDto.getNOW_HP() > uDto.getUSER_HP())
+						uDto.setNOW_HP(uDto.getUSER_HP());
+					uDto.setGOLD_HELD(uDto.getGOLD_HELD() + secondSelGold);
+					System.out.printf("최대 체력이 %d 잃고 %d 골드를 얻었습니다! %n", secondSelHp, secondSelGold);
+					System.out.printf("%d -> %d %n", uDto.getUSER_HP() + secondSelHp, uDto.getUSER_HP());
+					System.out.printf("%d -> %d", uDto.getGOLD_HELD() - secondSelGold, uDto.getGOLD_HELD());
 					break;
 				} else {
-					System.out.println("골드가 부족합니다.");
+					System.out.println("최대 체력이 낮습니다.");
 				}
-			}else {
-				
+			} else {
+				System.out.println("선택하지 않고 넘어갔습니다!");
+				break;
 			}
 		}
 
 	}
-	
+
+	// 현재 체력 회복
 	public void addHP() {
-		UserCharDTO dto = new UserCharDTO();
-//		dto.setHP(dto.getHP+10);
+		int healHp = 10;
+		UserCharDTO uDto = new UserCharDTO();
+		uDto.setNOW_HP(uDto.getNOW_HP() + healHp);
+		System.out.printf("체력을 %d 회복했습니다! %n", healHp);
+		System.out.printf("%d -> %d %n", uDto.getNOW_HP() - 10, uDto.getNOW_HP());
 	}
-	
+
+	// 최대 체력 증가
 	public void addMaxHP() {
-		UserCharDTO dto = new UserCharDTO();
-//		String sql = "UPDATE UPDATE USER_CHAR SET "
+		int addHp = 50;
+		UserCharDTO uDto = new UserCharDTO();
+		eDao.addMaxHpSql(addHp);
+		System.out.printf("최대 채력이 %d만큼 증가하였습니다! %n", addHp);
+		System.out.printf("%d -> %d %n", uDto.getUSER_HP() - 50, uDto.getUSER_HP());
 	}
 
 }
