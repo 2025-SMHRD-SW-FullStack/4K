@@ -108,7 +108,7 @@
   그에 대한 값으로 values 제일 앞에 user_char_seq.nextval을 추가하여 오류를 잡았다.
 
 * 문제3 <br>
-![_ERROR001.png](attachment:a5fb6d76-c540-42b6-9402-d489ea524f08:_ERROR001.png)
+
 - 문제점 : 외래키로 지정된 USER_TABLE의 ID와 START_CHARATER의 CHAR_NAME을 외래키로
   지정하기 위해선 UNIQUE들로 지정해야 되는데 지정이 안되어 있어서 생긴 오류 였다. 
 - 해결 방안 : 이미 테이블이 만들어진 USER_TABLE, START_CHARATER에  USER_TABLE의
@@ -123,26 +123,25 @@
   </tr>
   
 * 문제4 <br>
-![_ERROR03.png](attachment:f6f1cbcd-22cc-433e-9a8f-44e87390b793:_ERROR03.png)
+
 - 오류 원인 : TOP_RANK에는 4개의 컬럼(SEQ NUM, NICKNAME, CHAR NAME, MAX FLOOR)이 있지만 에러가 나온 메시지를 보면
   3개의 컬럼(NICKNAME, CHAR NAME, MAX FLOOR)만 적어서 나온 오류이다.
 - 해결 방안: TOP RANK 삽입 시 SEQ NUM도 같이 삽입하여 넣었다. SEQ NUM 삽입시 자동으로 증가하므로 시퀀스를 추가하였고
   값에는 NULL값을 넣어서 실행 하였더니 실행이 정상적으로 되었다.
   
 * 문제5 <br>
-![_ERROR04.png](attachment:5213f018-e62b-4c87-b5e3-5c6a5b44590a:_ERROR04.png)
+
 - 오류 원인 : 프로젝트에 ojdbc를 추가하지 않아서 생긴 오류이다.
 - 해결 방안 : java의 propertis → Java Build Path(Libraries) → AddExternal JARS 를 클릭하고
   oracle DB의 설치 경로로 가서 OJDBC를 찾아서 클릭 후 추가해준다.
 
 * 문제6 <br>
-![ERROR_0010430.png](attachment:97bc9bb3-610f-4a3a-8c82-c611ae4699b5:ERROR_0010430.png)
+
 - 오류 원인 : eclipse에서 commit and push가 제대로 수행이 되지 않아서 발생한 오류이다.
 - 해결 방안 : 기존 remote를 삭제후 다시생성하고 local을 재설정 해주니 문제가 해결 됨
 - 참고 blog : https://m.blog.naver.com/sim4858/220924984480
 
 * 문제7 <br>
-![ERROR_00104302.png](attachment:ff014fce-f56b-4e97-ac29-849ebcb61da5:ERROR_00104302.png)
 - 오류 원인 : SQL문의 명령어가 올바르게 종료되지 않아서 발생하였다.
 - 해결 방안
   <tr>
