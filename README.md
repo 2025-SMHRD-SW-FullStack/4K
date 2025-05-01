@@ -76,7 +76,7 @@
 ## 👨‍👩‍👦‍👦 팀원 역할
 <table>
   <tr>      
-<td align="center"><img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MzBfNzAg%2FMDAxNjU5MTkwOTYwNjY3.b-AHuBUGfBRyuYgMa9m3LywmDMHWQrBrlYKSl3l5GqMg.SNQiGiijg5Z5e5OQgG_hPIvEotXw8i36xrc9vEW0s4kg.JPEG.wlstmf2306%2FIMG_3404.jpg&type=a340" width="100" height="100"/></td>
+<td align="center"><img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTEwMTNfMTk5%2FMDAxNTcwOTcxNTAzOTA1.nOzom3N_6J078tkWxZHYMeN2kzy21VV_CDOC5uVeTTUg.2hokA4NlkmHf3OABGhu8E-cjIHsT4TQGx6G_uQ7tRCYg.JPEG.duaehwls%2F1570971504175.jpg&type=a340" width="100" height="100"/></td>
 
 <td align="center"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs2fa_aWLesF0zHMazVotaTTwOPyjOY2X5Nw&s" width="100" height="100"/></td>
 
