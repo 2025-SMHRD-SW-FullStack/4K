@@ -100,6 +100,7 @@ public class Battle {
 		boolean floorCheck = true;
 
 		if (floor > 20) {
+			sleep();
 			Top_RankDTO TRdto = new Top_RankDTO(nick, user_name, floor);
 			btDao.rankUpdate(TRdto);
 			System.out.println("탑의 꼭대기에 올랐습니다.");
@@ -107,13 +108,15 @@ public class Battle {
 			floorCheck = false;
 		}
 		if(floorCheck) {
-			
+			sleep();
 			System.out.println("현재 층 : " + floor + "층");
 			System.out.println("전투 시작!");
+			sleep();
 		}
 		while (floorCheck) {
 			System.out.println("턴 : " + turn);
 			turn++;
+			sleep();
 			System.out.println("[" + mon_name + "] 체력 : " + mon_now_hp + "/" + mon_hp);
 			System.out.println("당신의 체력 : " + user_now_hp + "/" + user_hp);
 			System.out.println("당신의 공격력 : " + user_atk + " / 당신의 방어력 : " + user_def);
@@ -137,20 +140,24 @@ public class Battle {
 					if (skillCheck) {
 						System.out.println("고유 능력을 발동합니다.");
 						System.out.println("고유 능력은 전투마다 한번만 사용할 수 있습니다");
+						sleep();
 						if (user_name.equals("정시우")) {
 							System.out.println("[시간 지연]");
 							System.out.println("상대의 시간을 느리게 만듭니다");
 							System.out.println("이번 턴에 공격 횟수가 늘어납니다");
+							sleep();
 							siwooSkill=true;
 						} else if (user_name.equals("김하윤")) {
 							System.out.println("[강철의 힘]");
 							System.out.println("육체를 강철과 같이 만듭니다");
 							System.out.println("이번 턴에 받는 피해를 대폭 감소시킵니다.");
+							sleep();
 							bonus_def += 100;
 						} else {
 							System.out.println("[패턴 감지]");
 							System.out.println("상대의 공격을 예측할 수 있게 됩니다");
 							System.out.println("회피 확률을 얻습니다.");
+							sleep();
 							idamSkill = true;
 						}
 						skillCheck = false;
@@ -162,6 +169,7 @@ public class Battle {
 				}
 
 			}
+			sleep();
 			if (siwooSkill) {
 				System.out.println(user_name + "의 공격!");
 				int basicAtk = random(user_atk);
@@ -211,6 +219,7 @@ public class Battle {
 			} else {
 				System.out.println("적이 공격을 방어했습니다!");
 			}
+			sleep();
 
 			if (mon_now_hp <= 0) {
 				System.out.println(mon_name + "을(를) 처치했습니다!");
@@ -243,15 +252,21 @@ public class Battle {
 				}
 				idamSkill=false;
 			}
-
+			sleep();
 			if (user_now_hp <= 0) {
 				System.out.println("사망했습니다...");
 				user_win = false;
 				break;
 			}
+			try {
+			    Thread.sleep(1000); // 1초 지연
+			} catch (InterruptedException e) {
+			    e.printStackTrace();
+			}
 		}
 
 		if (user_win && floorCheck) {
+			sleep();
 			System.out.println("전투에 승리했습니다.");
 			// 전투 승리 이후에 경험치 얻고 레벨업하면 캐릭터 스텟 변동 시켜준 이후에 저장
 			user_exp = user_exp + mon_exp;
@@ -269,6 +284,7 @@ public class Battle {
 					user_def++;
 					System.out.println("현재 레벨 : " + user_level);
 				}
+				sleep();
 			}
 
 			// 배틀 dto에 실어서 보내야하는것
@@ -277,14 +293,20 @@ public class Battle {
 					user_gold);
 			btDao.battleEndUpdate(btEndDto);
 
+			System.out.println("다음 층으로 향하는 계단을 오릅니다.");
+			sleep();
 			return true;
-
 		} else if(!user_win && floorCheck) {
 			System.out.println("전투에 패배했습니다. 1층으로 돌아갑니다.");
 			System.out.println("탑의 비석에 당신의 기록이 새겨졌습니다.");
 			btDao.battleLoseUpdate(id, user_hp);
 			Top_RankDTO TRdto = new Top_RankDTO(nick, user_name, floor);
 			btDao.rankUpdate(TRdto);
+			try {
+			    Thread.sleep(1000); // 1초 지연
+			} catch (InterruptedException e) {
+			    e.printStackTrace();
+			}
 
 			return false;
 		} else {
@@ -295,5 +317,13 @@ public class Battle {
 
 	public int random(int atk) {
 		return atk + (int) (Math.random() * 10);
+	}
+	
+	public void sleep() {
+		try {
+		    Thread.sleep(1000); // 1초 지연
+		} catch (InterruptedException e) {
+		    e.printStackTrace();
+		}
 	}
 }
