@@ -1,16 +1,12 @@
 package controller;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 import model.EventDAO;
-import model.TopDTO;
 import model.UserCharDTO;
 
 public class Event{
 
-	TopDTO tDto;
 	EventDAO eDao;
 	Scanner sc;
 	int floor;
@@ -79,7 +75,7 @@ public class Event{
 					eDao.curseGoldNowHpSql(user,maxHp, secondSelGold);
 					System.out.printf("최대 체력이 %d 잃고 %d 골드를 얻었습니다! %n", maxHp, secondSelGold);
 					System.out.printf("%d -> %d %n", user.getUSER_HP() + maxHp, user.getUSER_HP());
-					System.out.printf("%d -> %d", user.getGOLD_HELD() - secondSelGold, user.getGOLD_HELD());
+					System.out.printf("%d -> %d %n", user.getGOLD_HELD() - secondSelGold, user.getGOLD_HELD());
 					break;
 				} else {
 					System.out.println("최대 체력이 낮습니다.");
@@ -95,11 +91,14 @@ public class Event{
 	// 현재 체력 회복
 	public void addHP() {
 		int healHp = 10;
-		user.setNOW_HP(user.getNOW_HP() + healHp);
+		int nowHp = user.getNOW_HP();
+		int hp = nowHp + healHp;
+		if(hp > user.getUSER_HP()) user.setNOW_HP(user.getUSER_HP());
+		user.setNOW_HP(hp);
 		eDao.addHpSql(user,healHp);
 		System.out.printf("현재 층 : %d층 %n",floor);
 		System.out.printf("체력을 %d 회복했습니다! %n", healHp);
-		System.out.printf("%d -> %d %n", user.getNOW_HP() - healHp, user.getNOW_HP());
+		System.out.printf("%d -> %d %n",nowHp, hp);
 	}
 
 	// 최대 체력 증가
@@ -115,20 +114,27 @@ public class Event{
 	// 골드 뻇기
 	public void subGold() {
 		int subGold = 50;
+		int nowGold = user.getGOLD_HELD();
+		int gold = nowGold - subGold;
+		if(gold < 0) gold = 0;
 		eDao.subGoldSql(user,subGold);
-		user.setGOLD_HELD(user.getGOLD_HELD() - subGold);
+		user.setGOLD_HELD(gold);
 		System.out.printf("현재 층 : %d층 %n",floor);
 		System.out.printf("%d 만큼 골드를 뺏겼습니다! %n",subGold);
-		System.out.printf("%d -> %d %n",user.getGOLD_HELD()+subGold,user.getGOLD_HELD());
+		System.out.printf("%d -> %d %n",nowGold,gold);
 	}
 	
 	// 공격력 뺏기
 	public void subAtk() {
 		int subAtk = 10;
+		int nowAtk = user.getUSER_ATK();
+		int atk = nowAtk - subAtk;
+		if(atk <= 1) atk = 1;
 		eDao.subAtkSql(user,subAtk);
 		user.setUSER_ATK(user.getUSER_ATK() - subAtk);
 		System.out.printf("현재 층 : %d층 %n",floor);
 		System.out.printf("%d 만큼 공격력이 낮아졌습니다! %n",subAtk);
+		System.out.printf("%d -> %d %n",nowAtk,atk);
 	}
 	
 	// 공격력 더하기
@@ -143,10 +149,14 @@ public class Event{
 	// 방어력 뺏기
 	public void subDef() {
 		int subDef = 10;
+		int nowDef = user.getUSER_DEF();
+		int def = nowDef - subDef;
+		if(def <= 1) def = 1;
 		eDao.subDefSql(user,subDef);
 		user.setUSER_DEF(user.getUSER_DEF() - subDef);
 		System.out.printf("현재 층 : %d층 %n",floor);
-		System.out.printf("%d 만큼 방어력이 낮아졌습니다!",subDef);
+		System.out.printf("%d 만큼 방어력이 낮아졌습니다! %n",subDef);
+		System.out.printf("%d -> %d %n",nowDef,def);
 	}
 	
 	// 방어력 더하기
@@ -155,7 +165,7 @@ public class Event{
 		eDao.sumDefSql(user,sumDef);
 		user.setUSER_DEF(user.getUSER_DEF() + sumDef);
 		System.out.printf("현재 층 : %d층 %n",floor);
-		System.out.printf("%d 만큼 방어력이 증가했습니다!",sumDef);
+		System.out.printf("%d 만큼 방어력이 증가했습니다! %n",sumDef);
 	}
 	
 	// 리스크 있는 공격력 올리기
@@ -200,16 +210,16 @@ public class Event{
 		
 	}
 	
-	// 능력치 상점
-	public void abilShop() {
+	// 능력치 선택
+	public void abilChoise() {
 		int maxHp = 10;
 		int atk = 10;
 		int def = 10;
 		int select = 0;
 		System.out.printf("현재 층 : %d층 %n",floor);
-		System.out.println("상점에 오신걸 환영합니다!");
+		System.out.println("보상을 선택하세요!");
 		System.out.printf("[1] 최대 체력 %d 증가 [2] 공격력 %d 증가 [3] 방어력 %d 증가 %n",maxHp,atk,def);
-		System.out.println("[4] 나가기 (하나만 구입할 수 있습니다.)");
+		System.out.println("[4] 나가기 (하나만 고를 수 있습니다.)");
 		select = sc.nextInt();
 		if(select == 1) {
 			eDao.addMaxHpSql(user,maxHp);
@@ -227,7 +237,7 @@ public class Event{
 			System.out.println("방어력이 증가했습니다!");
 			System.out.printf("방어력 : %d -> %d %n",user.getUSER_DEF()-def,user.getUSER_DEF());
 		}else {
-			System.out.println("상점에서 나갔습니다.");
+			System.out.println("선택하지 않았습니다.");
 		}
 	}
 	

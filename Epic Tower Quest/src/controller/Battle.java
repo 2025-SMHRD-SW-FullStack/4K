@@ -35,7 +35,7 @@ public class Battle {
 						() -> e.sumDef(),
 						() -> e.subDef(),
 						() -> e.curseAtk(),
-						() -> e.abilShop()
+						() -> e.abilChoise()
 						);
 				int idx = rand.nextInt(eventList.size());
 				eventList.get(idx).run();
@@ -113,14 +113,14 @@ public class Battle {
 		if(floorCheck) {
 			sleep();
 			System.out.println("현재 층 : " + floor + "층");
+			System.out.println("적이 등장했습니다");
 			System.out.println("전투 시작!");
 			sleep();
+			asc.img(floor);
 		}
 		while (floorCheck) {
 			System.out.println("턴 : " + turn);
 			turn++;
-			sleep();
-			asc.img(floor);
 			System.out.println("[" + mon_name + "] 체력 : " + mon_now_hp + "/" + mon_hp);
 			System.out.println("당신의 이름 : " +user_name);
 			System.out.println("당신의 레벨 : " +user_level);
