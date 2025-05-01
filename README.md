@@ -76,8 +76,7 @@
 ## 👨‍👩‍👦‍👦 팀원 역할
 <table>
   <tr>      
-<td align="center"><img src="[https://github.com/user-attachments/assets/f44d9d3b-4d2e-455e-b7c3-abfc78c434f3](https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTAyMjdfMjkx%2FMDAxNzQwNjQ0NTM4MDQ5.DyEU6bAQJvdHLwkQgnq3ZxBA8lWGq51Nagmn1XmsAcQg.Uk_ZFi_UtiOhhCh6GFnLkLt-Yy2CoxXOMASYD2451n8g.GIF%2F054cea4443b04bea93b737b5446fa9a6.gif&type=a340
-)" width="100" height="100"/></td>
+<td align="center"><img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MzBfNzAg%2FMDAxNjU5MTkwOTYwNjY3.b-AHuBUGfBRyuYgMa9m3LywmDMHWQrBrlYKSl3l5GqMg.SNQiGiijg5Z5e5OQgG_hPIvEotXw8i36xrc9vEW0s4kg.JPEG.wlstmf2306%2FIMG_3404.jpg&type=a340" width="100" height="100"/></td>
 
 <td align="center"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs2fa_aWLesF0zHMazVotaTTwOPyjOY2X5Nw&s" width="100" height="100"/></td>
 
