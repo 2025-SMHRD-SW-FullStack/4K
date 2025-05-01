@@ -10,7 +10,6 @@ public class EventDAO {
 	private Connection conn = null;
 	private PreparedStatement psmt = null;
 	private ResultSet rs = null;
-	UserCharDTO uDto = new UserCharDTO();
 	
 	private void getConn() {
 		try {
@@ -22,11 +21,11 @@ public class EventDAO {
 
 			conn = DriverManager.getConnection(url, userName, pw);
 
-			if (conn == null) {
-				System.out.println("연결 실패");
-			} else {
-				System.out.println("연결 성공");
-			}
+//			if (conn == null) {
+//				System.out.println("연결 실패");
+//			} else {
+//				System.out.println("연결 성공");
+//			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -50,10 +49,9 @@ public class EventDAO {
 	}
 	
 	// 골드 추가
-	public void addGoldSql(int gold) {
+	public void addGoldSql(UserCharDTO uDto,int gold) {
 		boolean check = false;
 		int result = 0;
-		
 		String sql = "UPDATE USER_CHAR SET GOLD_HELD = ? WHERE ID=?";
 		
 		try {
@@ -77,7 +75,7 @@ public class EventDAO {
 	}
 	
 	// 리스크 있는 골드 획득 현재 체력 뺏기
-	public void curseGoldNowHpSql(int hp,int gold) {
+	public void curseGoldNowHpSql(UserCharDTO uDto,int hp,int gold) {
 		boolean check =false;
 		int result = 0;
 		String sql = "UPDATE USER_CHAR SET USER_NOWHP = ? , GOLD_HELD = ? WHERE ID = ?";
@@ -98,7 +96,7 @@ public class EventDAO {
 	}
 	
 	// 리스크 있는 골드 획득 최대 채력 뻇기
-	public void curseGoldMaxHpSql(int maxHP,int gold) {
+	public void curseGoldMaxHpSql(UserCharDTO uDto,int maxHP,int gold) {
 		boolean check = false;
 		int result = 0;
 		String sql = "UPDATE USER_CHAR SET USER_HP =  ? , GOLD_HELD = ? WHERE ID = ?";
@@ -122,7 +120,7 @@ public class EventDAO {
 	}
 	
 	// 현재 체력 회복
-	public void addHpSql(int hp) {
+	public void addHpSql(UserCharDTO uDto,int hp) {
 		boolean check = false;
 		int result = 0;
 		String sql = "UPDATE USER_CHAR SET NOW_HP = ? WHERE ID = ?";
@@ -144,7 +142,7 @@ public class EventDAO {
 	}
 	
 	// 최대 체력 증가
-	public void addMaxHpSql(int hp) {
+	public void addMaxHpSql(UserCharDTO uDto,int hp) {
 		boolean check = false;
 		int result = 0;
 		String sql = "UPDATE USER_CHAR SET USER_HP = ? WHERE ID = ?";
@@ -167,9 +165,10 @@ public class EventDAO {
 	}
 	
 	// 골드 뺏기
-	public void subGoldSql(int gold) {
+	public void subGoldSql(UserCharDTO uDto,int gold) {
 		boolean check = false;
 		int result = 0;
+		System.out.println("유저 id : " + uDto.getID());
 		String sql = "UPDATE USER_CHAR SET GOLD_HELD = ? WHERE ID = ?";
 		
 		try {
@@ -191,7 +190,7 @@ public class EventDAO {
 	}
 
 	// 공격력 뺏기
-	public void subAtkSql(int atk) {
+	public void subAtkSql(UserCharDTO uDto,int atk) {
 		boolean check = false;
 		int result = 0;
 		String sql = "UPDATE USER_CHAR SET USER_ATK = ? WHERE ID = ?";
@@ -215,7 +214,7 @@ public class EventDAO {
 	}
 	
 	// 공격력 더하기
-	public void sumAtkSql(int atk) {
+	public void sumAtkSql(UserCharDTO uDto,int atk) {
 		boolean check = false;
 		int result = 0;
 		String sql = "UPDATE USER_CHAR SET USER_ATK = ? WHERE ID = ?";
@@ -239,7 +238,7 @@ public class EventDAO {
 	}
 	
 	// 방어력 뺏기
-	public void subDefSql(int def) {
+	public void subDefSql(UserCharDTO uDto,int def) {
 		boolean check = false;
 		int result = 0;
 		String sql = "UPDATE USER_CHAR SET USER_DEF = ? WHERE ID = ?";
@@ -263,7 +262,7 @@ public class EventDAO {
 	}
 	
 	// 방어력 더하기
-	public void sumDefSql(int def) {
+	public void sumDefSql(UserCharDTO uDto,int def) {
 		boolean check = false;
 		int result = 0;
 		String sql = "UPDATE USER_CHAR SET USER_DEF = ? WHERE ID = ?";
@@ -286,7 +285,7 @@ public class EventDAO {
 	}
 	
 	// 방어력 낮추고 공격력 올리기
-	public void subDefAddAtkSql(int def,int atk) {
+	public void subDefAddAtkSql(UserCharDTO uDto,int def,int atk) {
 		boolean check = false;
 		int result = 0;
 		String sql = "UPDATE USER_CHAR SET USER_DEF = ?,USER_ATK = ? WHERE ID = ?";
@@ -309,7 +308,7 @@ public class EventDAO {
 	}
 	
 	// 최대 체력 낮추고 공격력 올리기
-	public void subMaxHpAddAtkSql(int hp, int atk) {
+	public void subMaxHpAddAtkSql(UserCharDTO uDto,int hp, int atk) {
 		boolean check =false;
 		int result = 0;
 		String sql = "UPDATE USER_CHAR SET USER_HP = ?, USER_ATK = ? WHERE ID = ?";

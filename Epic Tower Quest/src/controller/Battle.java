@@ -22,7 +22,7 @@ public class Battle {
 		while (true) {
 			UserCharDTO userDto = btDao.userCharDto(id);
 			if (floor % 5 == 0 && floor!=20) {
-				Event e = new Event(userDto);
+				Event e = new Event(userDto,floor);
 				List<Runnable> eventList = Arrays.asList(
 						() -> e.addGold(),
 						() -> e.subGold(),
