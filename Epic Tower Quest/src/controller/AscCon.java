@@ -55,7 +55,7 @@ public class AscCon {
 			img.ice_Elemental();
 			break;
 		case 20 :
-			System.out.println("보스 더미");
+			img.Boss();
 			break;
 			
 		default:

@@ -151,7 +151,6 @@ public class BattleDAO {
 			psmt.setString(2, id);
 
 			result = psmt.executeUpdate();
-			System.out.println(result);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
