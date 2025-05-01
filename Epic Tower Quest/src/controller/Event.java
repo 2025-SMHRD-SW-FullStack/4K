@@ -198,24 +198,22 @@ public class Event{
 			eDao.addMaxHpSql(maxHp);
 			uDto.setUSER_HP(uDto.getUSER_HP()+maxHp);
 			System.out.println("최대 체력이 증가하였습니다!");
-//			System.out.printf("최대 체력 : %d -> %d %n",uD);
+			System.out.printf("최대 체력 : %d -> %d %n",uDto.getUSER_HP()-maxHp,uDto.getUSER_HP());
+		}else if(select == 2) {
+			eDao.sumAtkSql(atk);
+			uDto.setUSER_ATK(uDto.getUSER_ATK()+atk);
+			System.out.println("공격력이 증가했습니다!");
+			System.out.printf("공격력 : %d -> %d %n",uDto.getUSER_ATK()-atk,uDto.getUSER_ATK());
+		}else if(select == 3) {
+			eDao.sumDefSql(def);
+			uDto.setUSER_DEF(uDto.getUSER_DEF()+def);
+			System.out.println("방어력이 증가했습니다!");
+			System.out.printf("방어력 : %d -> %d %n",uDto.getUSER_DEF()-def,uDto.getUSER_DEF());
+		}else {
+			System.out.println("상점에서 나갔습니다.");
 		}
 	}
 	
-//	Event e = new Event(userDto);
-//	List<Runnable> eventList = Arrays.asList(
-//			() -> e.addGold(),
-//			() -> e.subGold(),
-//			() -> e.addHP(),
-//			() -> e.addMaxHP(),
-//			() -> e.curseGold(),
-//			() -> e.sumAtk(),
-//			() -> e.subAtk(),
-//			() -> e.sumDef(),
-//			() -> e.subDef(),
-//			() -> e.curseAtk()
-//			);
-//	int idx = rand.nextInt(eventList.size());
-//	eventList.get(idx).run();
+
 	
 }
