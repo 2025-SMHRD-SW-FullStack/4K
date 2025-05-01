@@ -2,6 +2,7 @@ package controller;
 
 import java.util.Scanner;
 
+import javazoom.jl.player.MP3Player;
 import model.UserCharDAO;
 import model.UserCharDTO;
 import model.UserDAO;
@@ -15,10 +16,15 @@ public class Lobby {
 
 		UserCharDTO userChar = dao.getUserCharInfo(user.getID());
 
+		// mp3
+		MP3Player mp3 = new MP3Player();
+
+		mp3.play("src/music/로비.mp3");
+
 		if (userChar == null) {
 			CharChoice charchoice = new CharChoice();
 			charchoice.CharChoice(user.getID());
-			
+
 		}
 
 		// 로비의 아스키 아트 출력 해주면 좋을것 같음
@@ -76,11 +82,11 @@ public class Lobby {
 					break;
 				}
 
-			}else if(input == 4) {
+			} else if (input == 4) {
 				Rank rk = new Rank();
 				System.out.println("닉네임\t캐릭터\t최대층");
 				rk.showRank();
-			}else if (input == 5) {
+			} else if (input == 5) {
 				System.out.println("정말로 탑을 나가시겠습니까?");
 				System.out.println("[1]탑을 나간다 [2]다시 로비로 돌아간다 ");
 				input = sc.nextInt();
