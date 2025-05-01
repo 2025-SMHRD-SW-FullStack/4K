@@ -20,11 +20,11 @@ public class Lobby {
 		MP3Player mp3 = new MP3Player();
 		
 		// 상대경로
-//		mp3.play("./로비.mp3");
+		mp3.play("./로비.mp3");
 		
 		
 		// 절대경로
-		mp3.play("src/music/로비.mp3");
+//		mp3.play("src/music/로비.mp3");
 		
 
 		if (userChar == null) {
@@ -65,6 +65,7 @@ public class Lobby {
 			} else if (input == 2) {
 				// 아스키 코드
 				System.out.println("로비 한켠에 위치한 자그마한 대장간에 들렸습니다. ");
+				System.out.println();
 				System.out.println("한 드워프가 당신을 반깁니다. ");
 				System.out.println("\"어서오시게나! 오랜만의 방문객이군! 무슨일로 왔는가?\"");
 				Upgrade upgrade = new Upgrade();
@@ -79,9 +80,11 @@ public class Lobby {
 				boolean floor = battle.floorCheck(user.getID(), user.getNICKNAME());
 
 				if (floor) {
-
+					System.out.println();
 					System.out.println("\"너는 아직 끝나지 않았다.\"");
+					System.out.println();
 					System.out.println("당신은 다시 눈을 뜨게되었습니다.");
+					System.out.println();
 //				System.out.println("흐릿한 기억이 남았습니다.");
 					System.out.println("당신은 탑의 초입에 서 있습니다.");
 				} else {

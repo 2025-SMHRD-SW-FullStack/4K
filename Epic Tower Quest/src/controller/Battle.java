@@ -112,13 +112,16 @@ public class Battle {
 		}
 		if(floorCheck) {
 			sleep();
-			System.out.println("현재 층 : " + floor + "층");
+			System.out.println();
+			System.out.println("====== 현재 층 : " + floor + "층 =======");
+			System.out.println();
 			System.out.println("적이 등장했습니다");
 			System.out.println("전투 시작!");
 			sleep();
 			asc.img(floor);
 		}
 		while (floorCheck) {
+			System.out.println();
 			System.out.println("턴 : " + turn);
 			turn++;
 			System.out.println("[" + mon_name + "] 체력 : " + mon_now_hp + "/" + mon_hp);
@@ -273,6 +276,7 @@ public class Battle {
 
 		if (user_win && floorCheck) {
 			sleep();
+			System.out.println();
 			System.out.println("전투에 승리했습니다.");
 			// 전투 승리 이후에 경험치 얻고 레벨업하면 캐릭터 스텟 변동 시켜준 이후에 저장
 			user_exp = user_exp + mon_exp;
@@ -298,12 +302,14 @@ public class Battle {
 			BattleDTO btEndDto = new BattleDTO(id, user_hp, user_now_hp, user_level, user_exp, user_atk, user_def,
 					user_gold);
 			btDao.battleEndUpdate(btEndDto);
-
+			System.out.println();
 			System.out.println("다음 층으로 향하는 계단을 오릅니다.");
 			sleep();
 			return true;
 		} else if(!user_win && floorCheck) {
+			System.out.println();
 			System.out.println("전투에 패배했습니다. 1층으로 돌아갑니다.");
+			System.out.println();
 			System.out.println("탑의 비석에 당신의 기록이 새겨졌습니다.");
 			btDao.battleLoseUpdate(id, user_hp);
 			Top_RankDTO TRdto = new Top_RankDTO(nick, user_name, floor);
