@@ -122,6 +122,8 @@ public class Battle {
 			sleep();
 			asc.img(floor);
 			System.out.println("[" + mon_name + "] 체력 : " + mon_now_hp + "/" + mon_hp);
+			System.out.println("당신의 이름 : " +user_name);
+			System.out.println("당신의 레벨 : " +user_level);
 			System.out.println("당신의 체력 : " + user_now_hp + "/" + user_hp);
 			System.out.println("당신의 공격력 : " + user_atk + " / 당신의 방어력 : " + user_def);
 			int bonus_def = 0;
@@ -148,7 +150,7 @@ public class Battle {
 						if (user_name.equals("정시우")) {
 							System.out.println("[시간 지연]");
 							System.out.println("상대의 시간을 느리게 만듭니다");
-							System.out.println("이번 턴에 공격 횟수가 늘어납니다");
+							System.out.println("이번 턴에 자신의 공격 횟수가 늘어납니다");
 							sleep();
 							siwooSkill=true;
 						} else if (user_name.equals("김하윤")) {
@@ -160,7 +162,7 @@ public class Battle {
 						} else {
 							System.out.println("[패턴 감지]");
 							System.out.println("상대의 공격을 예측할 수 있게 됩니다");
-							System.out.println("회피 확률을 얻습니다.");
+							System.out.println("상대의 공격을 회피할 확률을 얻습니다.");
 							sleep();
 							idamSkill = true;
 						}
