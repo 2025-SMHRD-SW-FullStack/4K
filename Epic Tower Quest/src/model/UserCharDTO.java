@@ -51,7 +51,7 @@ public class UserCharDTO {
 			System.out.println("나이 : 20세");
 			System.out.println("대학생");
 			System.out.println();
-			System.out.println("서울에서 평범한 대학생활을 하던 중, 답이 나타난 날 우연히 첫 등반자로 선택되었다.");
+			System.out.println("서울에서 평범한 대학생활을 하던 중, 탑이 나타난 날 우연히 첫 등반자로 선택되었다.");
 			System.out.println("탑의 정상에 오르면 어떤 소원이든 들어준다는 관리자의 말에");
 			System.out.println("어릴 적 실종된 여동생을 찾기 위해 탑을 오르게 되었다.");
 			System.out.println();
@@ -119,12 +119,12 @@ public class UserCharDTO {
 			System.out.println("하윤은 경호 업무를 위해 청담동 고급 빌딩으로 향하고 있었다.");
 			System.out.println("그러나 갑자기 지하철이 급정거하고, 휴대폰 화면이 하얗게 빛났다.");
 			System.out.println();
-			System.out.println("    [[ 답이 열렸습니다. 등반 여부를 선택하십시오 ]]      ");
+			System.out.println("    [[ 탑이 열렸습니다. 등반 여부를 선택하십시오 ]]      ");
 			System.out.println();
 			System.out.println("본능적으로 느껴졌다.");
 			System.out.println("군 시절, 죽어간 동료들이 마지막까지 지켜내려 했던 '무언가'가 저 안에 있다는 걸.");
 			System.out.println();
-			System.out.println("하윤은 주먹을 꽊 쥐고 탑의 입구를 향애 달렸다.");
+			System.out.println("하윤은 주먹을 꽉 쥐고 탑의 입구를 향애 달렸다.");
 			System.out.println("이번엔 지켜내겠다. 무엇이든.");
 			break;
 		}
