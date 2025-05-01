@@ -14,10 +14,11 @@ import model.UserDTO;
 
 public class Battle {
 
-	public void floorCheck(String id, String nick) {
+	public boolean floorCheck(String id, String nick) {
 		int floor = 1;
 		BattleDAO btDao = new BattleDAO();
 		Random rand = new Random();
+		boolean floorCheck = true;
 
 		while (true) {
 			UserCharDTO userDto = btDao.userCharDto(id);
@@ -48,6 +49,10 @@ public class Battle {
 				}
 			}
 		}
+		if(floor>20) {
+			floorCheck = false;
+		}
+		return floorCheck;
 
 	}
 
@@ -92,16 +97,21 @@ public class Battle {
 		boolean siwooSkill = false;
 		boolean idamSkill = false;
 		boolean user_win = true;
+		boolean floorCheck = true;
 
 		if (floor > 20) {
 			Top_RankDTO TRdto = new Top_RankDTO(nick, user_name, floor);
 			btDao.rankUpdate(TRdto);
 			System.out.println("탑의 꼭대기에 올랐습니다.");
 			System.out.println("당신이 찾던 것이 저 앞에 있습니다-");
+			floorCheck = false;
 		}
-		System.out.println("현재 층 : " + floor + "층");
-		System.out.println("전투 시작!");
-		while (true) {
+		if(floorCheck) {
+			
+			System.out.println("현재 층 : " + floor + "층");
+			System.out.println("전투 시작!");
+		}
+		while (floorCheck) {
 			System.out.println("턴 : " + turn);
 			turn++;
 			System.out.println("[" + mon_name + "] 체력 : " + mon_now_hp + "/" + mon_hp);
@@ -241,7 +251,7 @@ public class Battle {
 			}
 		}
 
-		if (user_win) {
+		if (user_win && floorCheck) {
 			System.out.println("전투에 승리했습니다.");
 			// 전투 승리 이후에 경험치 얻고 레벨업하면 캐릭터 스텟 변동 시켜준 이후에 저장
 			user_exp = user_exp + mon_exp;
@@ -269,13 +279,15 @@ public class Battle {
 
 			return true;
 
-		} else {
+		} else if(!user_win && floorCheck) {
 			System.out.println("전투에 패배했습니다. 1층으로 돌아갑니다.");
 			System.out.println("탑의 비석에 당신의 기록이 새겨졌습니다.");
 			btDao.battleLoseUpdate(id, user_hp);
 			Top_RankDTO TRdto = new Top_RankDTO(nick, user_name, floor);
 			btDao.rankUpdate(TRdto);
 
+			return false;
+		} else {
 			return false;
 		}
 

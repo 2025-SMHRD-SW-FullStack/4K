@@ -2,6 +2,7 @@ package view;
 
 import java.util.Scanner;
 
+import controller.Lobby;
 import model.UserDAO;
 import model.UserDTO;
 
@@ -9,11 +10,12 @@ public class Main {
 
 	public static void main(String[] args) {
 		System.out.println("==== Epic Tower Quest 프로그램 ====");
+		// 타이틀이랑 아스키코드 출력
 		
 		Scanner sc = new Scanner(System.in);
 		
 		while(true) {
-			System.out.println("[1]회원가입 [2]로그인 [3]회원탈퇴 [4]전체회원 조회 [5]회원정보 수정 >> ");
+			System.out.print("[1]회원가입 [2]로그인 [3]회원탈퇴 >> ");
 			int number = sc.nextInt();
 			
 			if(number == 1) {
@@ -50,6 +52,8 @@ public class Main {
 				
 				if(dto != null) {
 					System.out.println(dto.getNICKNAME() + "님 환영합니다!");
+					Lobby game = new Lobby(dto);
+					break;
 				} else {
 					System.err.println("로그인에 실패했습니다.");
 				}
