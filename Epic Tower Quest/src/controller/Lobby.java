@@ -4,14 +4,16 @@ import java.util.Scanner;
 
 import model.UserCharDAO;
 import model.UserCharDTO;
+import model.UserDAO;
+import model.UserDTO;
 
 public class Lobby {
 	Scanner sc = new Scanner(System.in);
 	UserCharDAO dao = new UserCharDAO();
 
-	public Lobby(String id) {
+	public Lobby(UserDTO user) {
 
-		UserCharDTO userChar = dao.getUserCharInfo(id);
+		UserCharDTO userChar = dao.getUserCharInfo(user.getID());
 		
 		// 로비의 아스키 아트 출력 해주면 좋을것 같음
 		System.out.println("당신은 탑의 초입에 서 있습니다.");
@@ -27,7 +29,7 @@ public class Lobby {
 
 			if (input == 1) {
 				// 캐릭터 정보 출력 이름, 체력, 보유 골드, 공격력, 방어력, 무기 강화 정도, 방어구 강화 정도
-				userChar = dao.getUserCharInfo(id);
+				userChar = dao.getUserCharInfo(user.getID());
 				System.out.println("======= 캐릭터 정보 =======");
 				System.out.println(userChar.getCHAR_NAME());
 				System.out.println("LV. " + userChar.getLEV());
@@ -50,14 +52,15 @@ public class Lobby {
 				System.out.println("한 드워프가 당신을 반깁니다. ");
 				System.out.println("\"어서오시게나! 오랜만의 방문객이군! 무슨일로 왔는가?\"");
 				Upgrade upgrade = new Upgrade();
-				upgrade.userCmd(id);
+				upgrade.userCmd(user.getID());
 			} else if (input == 3) {
+				
 				//아스키코드
 				System.out.println("당신은 안락한 로비를 떠나 타워를 오르기로 하였습니다. ");
 				System.out.println("이제 뒤로 돌아갈 수 없습니다. ");
 //				System.out.println(" 당신에게 여신의 가호가 있기를 ");
 				Battle battle = new Battle();
-				battle.floorCheck(id);
+				battle.floorCheck(user.getID(), user.getNICKNAME());
 				System.out.println("\"너는 아직 끝나지 않았다.\"");
 				System.out.println("당신은 다시 눈을 뜨게되었습니다.");
 //				System.out.println("흐릿한 기억이 남았습니다.");
