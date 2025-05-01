@@ -108,11 +108,12 @@
   그에 대한 값으로 values 제일 앞에 user_char_seq.nextval을 추가하여 오류를 잡았다.
 
 * 문제3 <br>
-
+![image](https://github.com/user-attachments/assets/bb323d50-5ec4-4726-8ea2-6507ee691fdb)
 - 문제점 : 외래키로 지정된 USER_TABLE의 ID와 START_CHARATER의 CHAR_NAME을 외래키로
   지정하기 위해선 UNIQUE들로 지정해야 되는데 지정이 안되어 있어서 생긴 오류 였다. 
 - 해결 방안 : 이미 테이블이 만들어진 USER_TABLE, START_CHARATER에  USER_TABLE의
   ID와 START_CHARATER의 CHAR_NAME을 UNIQUE로 변경하는 제약조건을 걸어 변경하였다.
+  <table>
   <tr>
     <td>
     ALTER TABLE USER_TABLE ADD CONSTRAINT SYS C007146 UNIQUE (ID);
@@ -121,29 +122,32 @@
       ALTER TABLE START_CHARATER ADD CONSTRAINT SYS C007147 UNIQUE(CHAR_NAME);
     </td>
   </tr>
+  </table>
   
 * 문제4 <br>
-
+![image](https://github.com/user-attachments/assets/f323eabd-c2e9-4124-b7a3-1144c653ab9d)
 - 오류 원인 : TOP_RANK에는 4개의 컬럼(SEQ NUM, NICKNAME, CHAR NAME, MAX FLOOR)이 있지만 에러가 나온 메시지를 보면
   3개의 컬럼(NICKNAME, CHAR NAME, MAX FLOOR)만 적어서 나온 오류이다.
 - 해결 방안: TOP RANK 삽입 시 SEQ NUM도 같이 삽입하여 넣었다. SEQ NUM 삽입시 자동으로 증가하므로 시퀀스를 추가하였고
   값에는 NULL값을 넣어서 실행 하였더니 실행이 정상적으로 되었다.
   
 * 문제5 <br>
-
+![image](https://github.com/user-attachments/assets/0b56ef5c-ff8a-42de-8221-b2b5707957c1)
 - 오류 원인 : 프로젝트에 ojdbc를 추가하지 않아서 생긴 오류이다.
 - 해결 방안 : java의 propertis → Java Build Path(Libraries) → AddExternal JARS 를 클릭하고
   oracle DB의 설치 경로로 가서 OJDBC를 찾아서 클릭 후 추가해준다.
 
 * 문제6 <br>
-
+![image](https://github.com/user-attachments/assets/85daee4b-d9e0-4661-9f9a-e5b4303b3769)
 - 오류 원인 : eclipse에서 commit and push가 제대로 수행이 되지 않아서 발생한 오류이다.
 - 해결 방안 : 기존 remote를 삭제후 다시생성하고 local을 재설정 해주니 문제가 해결 됨
 - 참고 blog : https://m.blog.naver.com/sim4858/220924984480
 
 * 문제7 <br>
+![image](https://github.com/user-attachments/assets/e8c903ae-be6e-4380-835d-7a38f3ff2f27)
 - 오류 원인 : SQL문의 명령어가 올바르게 종료되지 않아서 발생하였다.
 - 해결 방안
+<table>
   <tr>
     <td>
     INSERT INTO Start_Charater (CHAR_NAME, CHAR_ATK, CHAR_DEF, PERKS) VALUES
@@ -152,3 +156,4 @@
     ('서이담', 12, 10, '패턴 감지');
     </td>
   </tr>
+</table>
