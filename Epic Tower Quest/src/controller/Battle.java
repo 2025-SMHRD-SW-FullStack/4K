@@ -74,6 +74,9 @@ public class Battle {
 		BattleDAO btDao = new BattleDAO();
 
 		TopDTO topDto = btDao.topMon(floor);
+		
+		AscCon asc = new AscCon();
+		
 
 		String id = userDto.getID();
 		String user_name = userDto.getCHAR_NAME();
@@ -117,6 +120,7 @@ public class Battle {
 			System.out.println("턴 : " + turn);
 			turn++;
 			sleep();
+			asc.img(floor);
 			System.out.println("[" + mon_name + "] 체력 : " + mon_now_hp + "/" + mon_hp);
 			System.out.println("당신의 체력 : " + user_now_hp + "/" + user_hp);
 			System.out.println("당신의 공격력 : " + user_atk + " / 당신의 방어력 : " + user_def);
