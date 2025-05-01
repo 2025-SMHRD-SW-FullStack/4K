@@ -119,10 +119,8 @@
   <table>
   <tr>
     <td>
-    ALTER TABLE USER_TABLE ADD CONSTRAINT SYS C007146 UNIQUE (ID);
-    </td>
-    <td>
-      ALTER TABLE START_CHARATER ADD CONSTRAINT SYS C007147 UNIQUE(CHAR_NAME);
+    ALTER TABLE USER_TABLE ADD CONSTRAINT SYS C007146 UNIQUE (ID); <br>
+    ALTER TABLE START_CHARATER ADD CONSTRAINT SYS C007147 UNIQUE(CHAR_NAME);
     </td>
   </tr>
   </table>
@@ -153,9 +151,9 @@
 <table>
   <tr>
     <td>
-    INSERT INTO Start_Charater (CHAR_NAME, CHAR_ATK, CHAR_DEF, PERKS) VALUES
-    ('정시우', 18, 12, '시간 지연'),
-    ('김하윤', 25, 20, '강철의 힘'),
+    INSERT INTO Start_Charater (CHAR_NAME, CHAR_ATK, CHAR_DEF, PERKS) VALUES<br>
+    ('정시우', 18, 12, '시간 지연'),<br>
+    ('김하윤', 25, 20, '강철의 힘'),<br>
     ('서이담', 12, 10, '패턴 감지');
     </td>
   </tr>
