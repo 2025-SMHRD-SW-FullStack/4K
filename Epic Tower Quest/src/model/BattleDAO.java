@@ -23,11 +23,6 @@ public class BattleDAO {
 
 			conn = DriverManager.getConnection(url, userName, pw);
 
-			if (conn == null) {
-				System.out.println("1연결 실패");
-			} else {
-				System.out.println("1연결 성공");
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -71,7 +66,7 @@ public class BattleDAO {
 				dto = new TopDTO(rs.getInt("floor"), rs.getString("mon_name"), rs.getInt("mon_atk"),
 						rs.getInt("mon_def"), rs.getInt("mon_hp"), rs.getInt("drop_gold"), rs.getString("event"),
 						rs.getInt("top_exp"));
-			}else {
+			} else {
 				System.out.println("불러오기실패");
 			}
 
@@ -113,30 +108,75 @@ public class BattleDAO {
 		}
 		return dto;
 	}
-	
+
 	public int battleEndUpdate(BattleDTO dto) {
 		int result = 0;
 
 		try {
-			System.out.println("여기까지 오나 체크");
 			getConn();
-			String sql = "update user_char set now_hp = ? ,user_atk=?, user_def = ?, gold_held =? where id = ?";
+			String sql = "update user_char set user_hp = ? , now_hp = ? ,lev =?,exp = ? ,user_atk=?, user_def = ?, gold_held =? where id = ?";
 
 			psmt = conn.prepareStatement(sql);
-			System.out.println("여기까지도 오나 체크");
 
-			psmt.setInt(1, dto.getNow_hp());
-			psmt.setInt(2, dto.getUser_atk());
-			psmt.setInt(3, dto.getUser_def());
-			psmt.setInt(4, dto.getGold_held());
-			psmt.setString(5, dto.getId());
+			psmt.setInt(1, dto.getUser_hp());
+			psmt.setInt(2, dto.getNow_hp());
+			psmt.setInt(3, dto.getUser_level());
+			psmt.setInt(4, dto.getUser_exp());
+			psmt.setInt(5, dto.getUser_atk());
+			psmt.setInt(6, dto.getUser_def());
+			psmt.setInt(7, dto.getGold_held());
+			psmt.setString(8, dto.getId());
+
 			result = psmt.executeUpdate();
 
-			if (result > 0) {
-				System.out.println("유저 정보 수정 성공");
-			} else {
-				System.out.println("유저 정보 수정 실패");
-			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			getclose();
+		}
+		return result;
+	}
+
+	public int battleLoseUpdate(String id, int hp) {
+		int result = 0;
+
+		try {
+			getConn();
+			String sql = "update user_char set now_hp = ? where id = ?";
+
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setInt(1, hp);
+			psmt.setString(2, id);
+
+			result = psmt.executeUpdate();
+			System.out.println(result);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			getclose();
+		}
+		return result;
+
+	}
+	
+	public int rankUpdate(Top_RankDTO TRdto) {
+
+		int result = 0;
+
+		try {
+			getConn();
+			String sql = "insert into top_rank values(top_rank_seq.nextval,?,?,?)";
+
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setString(1, TRdto.getNICKNAME());
+			psmt.setString(2, TRdto.getCHAR_NAME());
+			psmt.setInt(3, TRdto.getMAX_FLOOR());
+
+			result = psmt.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
