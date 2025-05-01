@@ -82,7 +82,7 @@
 
 <td align="center"><img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjExMDVfMjIg%2FMDAxNjY3NjU2NzEyMTg4.JaEAsHSunlFdDDenpqDwkllWUgUbwpiOj9wI7zreoo8g.Yb9EVpkjCOGCP_yFNsUgJwhT_Wze9F38Uhr276ppEHcg.PNG.naky1121%2Fimage.png&type=a340" width="100" height="100"/></td>
 
-<td align="center"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnfDzWBgj0v4ucyF-8RzCo0wakd04Xw5To3Q&s" width="100" height="100"/></td>
+<td align="center"><img src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fi.pinimg.com%2F736x%2F4d%2Ffc%2Faa%2F4dfcaa6eee4f16dce4a1fc2337a27c60.jpg&type=a340" width="100" height="100"/></td>
   </tr>
   <tr>
     <td align="center"><strong>팀장 : 김희광</strong></td>
@@ -93,7 +93,7 @@
   <tr>
     <td align="center"><b>DB 설계 및 구축, 아스키아트, PPT</b></td>
     <td align="center"><b>PM</b></td>
-    <td align="center"><b>강화 시스템 & 캐릭터 정보 관련</b></td>
+    <td align="center"><b>강화 & 캐릭터</b></td>
     <td align="center"><b>이벤트 기능 구현</b></td>
   </tr>
 </table>
