@@ -1,5 +1,8 @@
 package controller;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 import model.BattleDAO;
@@ -15,11 +18,22 @@ public class Battle {
 	public void floorCheck(String id,String nick) {
 		int floor = 1;
 		BattleDAO btDao = new BattleDAO();
+		Random rand = new Random();
 		
 		while(true) {
 			UserCharDTO userDto = btDao.userCharDto(id) ;
 			if(floor%5==0) {
-				System.out.println("이벤트 더미");
+				Event e = new Event(userDto);
+				List<Runnable> eventList = Arrays.asList(
+						() -> e.addGold(),
+						() -> e.addHP(),
+						() -> e.curseGold(),
+						() -> e.sumAtk(),
+						() -> e.sumDef(),
+						() -> e.curseAtk()
+						);
+				int idx = rand.nextInt(eventList.size());
+				eventList.get(idx).run();
 				floor++;
 			}else {
 				

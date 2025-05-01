@@ -7,10 +7,15 @@ import model.UserCharDTO;
 
 public class Event{
 
-	UserCharDTO uDto = new UserCharDTO();
-	EventDAO eDao = new EventDAO();
-	Scanner sc = new Scanner(System.in);
-
+	UserCharDTO uDto;
+	EventDAO eDao;
+	Scanner sc;
+	
+	public Event(UserCharDTO uDto) {
+		this.uDto = uDto;
+		this.eDao = new EventDAO();
+		this.sc = new Scanner(System.in);
+	}
 
 	// 골드 획득
 	public void addGold() {
