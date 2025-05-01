@@ -80,7 +80,7 @@
 
 <td align="center"><img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20160729_20%2Fhklimok_1469777339510RnrXY_PNG%2F%25B1%25D7%25B8%25B28.png&type=a340" width="100" height="100"/></td>
 
-<td align="center"><img src="![KakaoTalk_20250501_160229730](https://github.com/user-attachments/assets/abd6847d-0a83-4cf8-b127-e69a4a631cf1)" width="100" height="100"/></td>
+<td align="center"><img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjExMDVfMjIg%2FMDAxNjY3NjU2NzEyMTg4.JaEAsHSunlFdDDenpqDwkllWUgUbwpiOj9wI7zreoo8g.Yb9EVpkjCOGCP_yFNsUgJwhT_Wze9F38Uhr276ppEHcg.PNG.naky1121%2Fimage.png&type=a340" width="100" height="100"/></td>
 
 <td align="center"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnfDzWBgj0v4ucyF-8RzCo0wakd04Xw5To3Q&s" width="100" height="100"/></td>
   </tr>
