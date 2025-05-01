@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 import model.EventDAO;
@@ -181,5 +183,39 @@ public class Event{
 		}
 		
 	}
+	
+	// 능력치 상점
+	public void abilShop() {
+		int maxHp = 10;
+		int atk = 10;
+		int def = 10;
+		int select = 0;
+		System.out.println("상점에 오신걸 환영합니다!");
+		System.out.printf("[1] 최대 체력 %d 증가 [2] 공격력 %d 증가 [3] 방어력 %d 증가 %n",maxHp,atk,def);
+		System.out.println("[4] 나가기 (하나만 구입할 수 있습니다.)");
+		select = sc.nextInt();
+		if(select == 1) {
+			eDao.addMaxHpSql(maxHp);
+			uDto.setUSER_HP(uDto.getUSER_HP()+maxHp);
+			System.out.println("최대 체력이 증가하였습니다!");
+//			System.out.printf("최대 체력 : %d -> %d %n",uD);
+		}
+	}
+	
+//	Event e = new Event(userDto);
+//	List<Runnable> eventList = Arrays.asList(
+//			() -> e.addGold(),
+//			() -> e.subGold(),
+//			() -> e.addHP(),
+//			() -> e.addMaxHP(),
+//			() -> e.curseGold(),
+//			() -> e.sumAtk(),
+//			() -> e.subAtk(),
+//			() -> e.sumDef(),
+//			() -> e.subDef(),
+//			() -> e.curseAtk()
+//			);
+//	int idx = rand.nextInt(eventList.size());
+//	eventList.get(idx).run();
 	
 }

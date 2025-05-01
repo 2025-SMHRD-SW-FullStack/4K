@@ -23,17 +23,7 @@ public class Battle {
 		while(true) {
 			UserCharDTO userDto = btDao.userCharDto(id) ;
 			if(floor%5==0) {
-				Event e = new Event(userDto);
-				List<Runnable> eventList = Arrays.asList(
-						() -> e.addGold(),
-						() -> e.addHP(),
-						() -> e.curseGold(),
-						() -> e.sumAtk(),
-						() -> e.sumDef(),
-						() -> e.curseAtk()
-						);
-				int idx = rand.nextInt(eventList.size());
-				eventList.get(idx).run();
+
 				floor++;
 			}else {
 				
