@@ -9,7 +9,6 @@ public class Rank {
 	
 	public void showRank() {
 		tRankDao.showRankSql();
-		System.out.println("닉네임\t캐릭터\t최대층");
 		for(String s : tRankDao.showRankSql()) {
 			System.out.println(s);
 		}

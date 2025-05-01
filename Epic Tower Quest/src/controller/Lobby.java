@@ -29,7 +29,7 @@ public class Lobby {
 		while (true) {
 			System.out.println("무엇을 하시겠습니까?");
 			System.out.println("================================================");
-			System.out.println("[1]캐릭터 정보 확인 [2]강화 [3]탑을 오른다 [4]탑을 나간다");
+			System.out.println("[1]캐릭터 정보 확인 [2]강화 [3]탑을 오른다 [4]랭킹 확인 [5]탑을 나간다");
 
 			int input = sc.nextInt();
 
@@ -76,7 +76,11 @@ public class Lobby {
 					break;
 				}
 
-			} else if (input == 4) {
+			}else if(input == 4) {
+				Rank rk = new Rank();
+				System.out.println("닉네임\t캐릭터\t최대층");
+				rk.showRank();
+			}else if (input == 5) {
 				System.out.println("정말로 탑을 나가시겠습니까?");
 				System.out.println("[1]탑을 나간다 [2]다시 로비로 돌아간다 ");
 				input = sc.nextInt();
