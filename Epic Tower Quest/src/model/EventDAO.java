@@ -52,10 +52,10 @@ public class EventDAO {
 	public void addGoldSql(UserCharDTO uDto,int gold) {
 		boolean check = false;
 		int result = 0;
-		String sql = "UPDATE USER_CHAR SET GOLD_HELD = ? WHERE ID=?";
 		
 		try {
 			getConn();
+			String sql = "UPDATE USER_CHAR SET GOLD_HELD = ? WHERE ID=?";
 			psmt=conn.prepareStatement(sql);
 			psmt.setInt(1, uDto.getGOLD_HELD()+gold);
 			psmt.setString(2, uDto.getID());
@@ -78,9 +78,9 @@ public class EventDAO {
 	public void curseGoldNowHpSql(UserCharDTO uDto,int hp,int gold) {
 		boolean check =false;
 		int result = 0;
-		String sql = "UPDATE USER_CHAR SET USER_NOWHP = ? , GOLD_HELD = ? WHERE ID = ?";
 		try {
 			getConn();
+			String sql = "UPDATE USER_CHAR SET USER_NOWHP = ? , GOLD_HELD = ? WHERE ID = ?";
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, uDto.getNOW_HP() - hp);
 			psmt.setInt(2, uDto.getGOLD_HELD() + gold);
@@ -99,9 +99,9 @@ public class EventDAO {
 	public void curseGoldMaxHpSql(UserCharDTO uDto,int maxHP,int gold) {
 		boolean check = false;
 		int result = 0;
-		String sql = "UPDATE USER_CHAR SET USER_HP =  ? , GOLD_HELD = ? WHERE ID = ?";
 		try {
 			getConn();
+			String sql = "UPDATE USER_CHAR SET USER_HP =  ? , GOLD_HELD = ? WHERE ID = ?";
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, maxHP);
 			psmt.setInt(2, uDto.getGOLD_HELD() + gold);
@@ -120,14 +120,18 @@ public class EventDAO {
 	}
 	
 	// 현재 체력 회복
-	public void addHpSql(UserCharDTO uDto,int hp) {
+	public void addHpSql(UserCharDTO uDto,int sumHp) {
 		boolean check = false;
 		int result = 0;
-		String sql = "UPDATE USER_CHAR SET NOW_HP = ? WHERE ID = ?";
+		int hp = uDto.getNOW_HP() + sumHp;
+		if(uDto.getUSER_HP() < hp) {
+			hp = uDto.getUSER_HP();
+		}
 		try {
 			getConn();
+			String sql = "UPDATE USER_CHAR SET NOW_HP = ? WHERE ID = ?";
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1,uDto.getNOW_HP() + hp);
+			psmt.setInt(1,hp);
 			psmt.setString(2, uDto.getID());
 			result = psmt.executeUpdate();
 			if(result > 0) check = true;
@@ -145,9 +149,9 @@ public class EventDAO {
 	public void addMaxHpSql(UserCharDTO uDto,int hp) {
 		boolean check = false;
 		int result = 0;
-		String sql = "UPDATE USER_CHAR SET USER_HP = ? WHERE ID = ?";
 		try {
 			getConn();
+			String sql = "UPDATE USER_CHAR SET USER_HP = ? WHERE ID = ?";
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, hp);
 			psmt.setString(2,uDto.getID());
@@ -165,16 +169,19 @@ public class EventDAO {
 	}
 	
 	// 골드 뺏기
-	public void subGoldSql(UserCharDTO uDto,int gold) {
+	public void subGoldSql(UserCharDTO uDto,int subGold) {
 		boolean check = false;
 		int result = 0;
-		System.out.println("유저 id : " + uDto.getID());
-		String sql = "UPDATE USER_CHAR SET GOLD_HELD = ? WHERE ID = ?";
+		int gold = uDto.getGOLD_HELD() - subGold;
+		if(gold < 0) {
+			gold = 0;
+		}
 		
 		try {
 			getConn();
+			String sql = "UPDATE USER_CHAR SET GOLD_HELD = ? WHERE ID = ?";
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, uDto.getGOLD_HELD() + gold);
+			psmt.setInt(1, gold);
 			psmt.setString(2, uDto.getID());
 			result = psmt.executeUpdate();
 			if(result > 0) check = true;
@@ -193,10 +200,10 @@ public class EventDAO {
 	public void subAtkSql(UserCharDTO uDto,int atk) {
 		boolean check = false;
 		int result = 0;
-		String sql = "UPDATE USER_CHAR SET USER_ATK = ? WHERE ID = ?";
 		
 		try {
 			getConn();
+			String sql = "UPDATE USER_CHAR SET USER_ATK = ? WHERE ID = ?";
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, uDto.getUSER_ATK() - atk);
 			psmt.setString(2, uDto.getID());
@@ -217,10 +224,10 @@ public class EventDAO {
 	public void sumAtkSql(UserCharDTO uDto,int atk) {
 		boolean check = false;
 		int result = 0;
-		String sql = "UPDATE USER_CHAR SET USER_ATK = ? WHERE ID = ?";
 		
 		try {
 			getConn();
+			String sql = "UPDATE USER_CHAR SET USER_ATK = ? WHERE ID = ?";
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1,  uDto.getUSER_ATK() + atk);
 			psmt.setString(2, uDto.getID());
@@ -238,15 +245,19 @@ public class EventDAO {
 	}
 	
 	// 방어력 뺏기
-	public void subDefSql(UserCharDTO uDto,int def) {
+	public void subDefSql(UserCharDTO uDto,int subDef) {
 		boolean check = false;
 		int result = 0;
-		String sql = "UPDATE USER_CHAR SET USER_DEF = ? WHERE ID = ?";
+		int def = uDto.getUSER_DEF() - subDef;
+		if( def < 0) {
+			def = 0;
+		}
 		
 		try {
 			getConn();
+			String sql = "UPDATE USER_CHAR SET USER_DEF = ? WHERE ID = ?";
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, uDto.getUSER_DEF() - def);
+			psmt.setInt(1,def);
 			psmt.setString(2, uDto.getID());
 			result = psmt.executeUpdate();
 			if(result > 0) check = true;
@@ -265,9 +276,9 @@ public class EventDAO {
 	public void sumDefSql(UserCharDTO uDto,int def) {
 		boolean check = false;
 		int result = 0;
-		String sql = "UPDATE USER_CHAR SET USER_DEF = ? WHERE ID = ?";
 		try {
 			getConn();
+			String sql = "UPDATE USER_CHAR SET USER_DEF = ? WHERE ID = ?";
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, uDto.getUSER_DEF() + def);
 			psmt.setString(2, uDto.getID());
@@ -285,16 +296,21 @@ public class EventDAO {
 	}
 	
 	// 방어력 낮추고 공격력 올리기
-	public void subDefAddAtkSql(UserCharDTO uDto,int def,int atk) {
+	public void subDefAddAtkSql(UserCharDTO uDto,int subDef,int atk) {
 		boolean check = false;
 		int result = 0;
-		String sql = "UPDATE USER_CHAR SET USER_DEF = ?,USER_ATK = ? WHERE ID = ?";
+		int def = uDto.getUSER_DEF() - subDef;
+		if(def < 0) {
+			def = 0;
+		}
 		try {
 			getConn();
+			String sql = "UPDATE USER_CHAR SET USER_DEF = ?,USER_ATK = ? WHERE ID = ?";
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, uDto.getUSER_DEF() - def);
+			psmt.setInt(1, def);
 			psmt.setInt(2, uDto.getUSER_ATK() + atk);
 			psmt.setString(3, uDto.getID());
+			result = psmt.executeUpdate();
 			if(result > 0) check = true;
 			else {
 				System.out.println("방어력 낮추고 공격력 올리기 이벤트 오류");
@@ -308,15 +324,21 @@ public class EventDAO {
 	}
 	
 	// 최대 체력 낮추고 공격력 올리기
-	public void subMaxHpAddAtkSql(UserCharDTO uDto,int hp, int atk) {
+	public void subMaxHpAddAtkSql(UserCharDTO uDto,int subHp, int atk) {
 		boolean check =false;
 		int result = 0;
-		String sql = "UPDATE USER_CHAR SET USER_HP = ?, USER_ATK = ? WHERE ID = ?";
+		int hp = uDto.getUSER_HP() - subHp;
+		if( hp < uDto.getNOW_HP()) {
+			uDto.setNOW_HP(uDto.getUSER_HP());
+		}
 		try {
+			getConn();
+			String sql = "UPDATE USER_CHAR SET USER_HP = ?, USER_ATK = ? WHERE ID = ?";
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, uDto.getUSER_HP() - hp);
+			psmt.setInt(1, hp);
 			psmt.setInt(2, uDto.getUSER_ATK() + atk);
 			psmt.setString(3, uDto.getID());
+			result = psmt.executeUpdate();
 			if(result > 0) check = true;
 			else {
 				System.out.println("최대 체력 낮추고 공격력 올리기 이벤트 오류");
