@@ -18,8 +18,14 @@ public class Lobby {
 
 		// mp3
 		MP3Player mp3 = new MP3Player();
-
+		
+		// 상대경로
+//		mp3.play("./로비.mp3");
+		
+		
+		// 절대경로
 		mp3.play("src/music/로비.mp3");
+		
 
 		if (userChar == null) {
 			CharChoice charchoice = new CharChoice();
