@@ -14,10 +14,11 @@ import model.UserDTO;
 
 public class Battle {
 
-	public void floorCheck(String id, String nick) {
+	public boolean floorCheck(String id, String nick) {
 		int floor = 1;
 		BattleDAO btDao = new BattleDAO();
 		Random rand = new Random();
+		boolean floorCheck = true;
 
 		while (true) {
 			UserCharDTO userDto = btDao.userCharDto(id);
@@ -48,6 +49,10 @@ public class Battle {
 				}
 			}
 		}
+		if(floor>20) {
+			floorCheck = false;
+		}
+		return floorCheck;
 
 	}
 
