@@ -35,7 +35,7 @@ public class Battle {
 						() -> e.sumDef(),
 						() -> e.subDef(),
 						() -> e.curseAtk(),
-						() -> e.abilShop()
+						() -> e.abilChoise()
 						);
 				int idx = rand.nextInt(eventList.size());
 				eventList.get(idx).run();
