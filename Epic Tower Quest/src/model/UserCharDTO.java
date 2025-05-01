@@ -29,15 +29,6 @@ public class UserCharDTO {
 		ARMOR = aRMOR;
 	}
 	
-	
-
-
-
-
-
-
-
-
 
 	public UserCharDTO(String iD, String cHAR_NAME, int lEV, int eXP, int gOLD_HELD, int uSER_ATK, int uSER_DEF,
 			int uSER_HP, int nOW_HP) {
@@ -52,15 +43,14 @@ public class UserCharDTO {
 		USER_HP = uSER_HP;
 		NOW_HP = nOW_HP;
 	}
-
-
-
-
-
-
-
-
-
+	
+	public void JeongInfo(int i) {
+		
+	}
+	
+	public void KimInfo(int i) {
+		
+	}
 
 
 	public UserCharDTO() {
