@@ -70,7 +70,7 @@
 <br>
 
 ## 📌 ER다이어그램
-![image](https://github.com/user-attachments/assets/ac9101fd-8398-4fab-9db0-35e69a30a18e)
+![MINI](https://github.com/user-attachments/assets/6fcf17e2-07d0-45f6-890e-39b0c319583f)
 <br>
 
 ## 👨‍👩‍👦‍👦 팀원 역할
