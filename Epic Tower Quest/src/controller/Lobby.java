@@ -105,6 +105,16 @@ public class Lobby {
 						mp3.stop(); // 음악 멈춤 메소드 
 					}
 				} else {
+					String character = userChar.getCHAR_NAME();
+					UserCharDTO dto = new UserCharDTO();
+					
+					switch(character) {
+					
+					case "정시우" : dto.JeongInfo("ep"); break;
+					case "김하윤" : dto.KimInfo("ep"); break;
+					case "서이담" : dto.SeoInfo("ep"); break;
+					
+					}
 					break;
 				}
 
@@ -113,14 +123,14 @@ public class Lobby {
 				System.out.println("닉네임\t캐릭터\t최대층");
 				rk.showRank();
 			} else if (input == 5) {
-				System.out.println("정말로 탑을 나가시겠습니까?");
+				System.out.println("\n정말로 탑을 나가시겠습니까?");
 				System.out.println("[1]탑을 나간다 [2]다시 로비로 돌아간다 ");
 				input = sc.nextInt();
 				if (input == 1) {
-					System.out.println("안녕히 가십시오.");
+					System.out.println("\n탑이 당신을 놓아줍니다. \n지독히도 익숙한 현실로 귀환합니다.\n");
 					break;
 				} else if (input == 2) {
-					System.out.println("당신은 다시 로비로 돌아가기로 결정하였습니다.");
+					System.out.println("\n당신은 다시 로비로 돌아가기로 결정하였습니다.\n");
 				}
 			}
 		}
