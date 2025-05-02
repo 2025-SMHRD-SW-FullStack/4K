@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+import javazoom.jl.player.MP3Player;
 import model.BattleDAO;
 import model.BattleDTO;
 import model.TopDTO;
@@ -19,24 +20,17 @@ public class Battle {
 		BattleDAO btDao = new BattleDAO();
 		Random rand = new Random();
 		boolean floorCheck = true;
+		// mp3
+		MP3Player mp3 = new MP3Player();
+		mp3.play("./전투.mp3");
 
 		while (true) {
 			UserCharDTO userDto = btDao.userCharDto(id);
-			if (floor % 5 == 0 && floor!=20) {
-				Event e = new Event(userDto,floor);
-				List<Runnable> eventList = Arrays.asList(
-						() -> e.addGold(),
-						() -> e.subGold(),
-						() -> e.addHP(),
-						() -> e.addMaxHP(),
-						() -> e.curseGold(),
-						() -> e.sumAtk(),
-						() -> e.subAtk(),
-						() -> e.sumDef(),
-						() -> e.subDef(),
-						() -> e.curseAtk(),
-						() -> e.abilChoise()
-						);
+			if (floor % 5 == 0 && floor != 20) {
+				Event e = new Event(userDto, floor);
+				List<Runnable> eventList = Arrays.asList(() -> e.addGold(), () -> e.subGold(), () -> e.addHP(),
+						() -> e.addMaxHP(), () -> e.curseGold(), () -> e.sumAtk(), () -> e.subAtk(), () -> e.sumDef(),
+						() -> e.subDef(), () -> e.curseAtk(), () -> e.abilChoise());
 				int idx = rand.nextInt(eventList.size());
 				eventList.get(idx).run();
 				floor++;
@@ -49,9 +43,11 @@ public class Battle {
 				}
 			}
 		}
-		if(floor>20) {
+		if (floor > 20) {
 			floorCheck = false;
 		}
+		mp3.stop();
+		
 		return floorCheck;
 
 	}
@@ -74,9 +70,8 @@ public class Battle {
 		BattleDAO btDao = new BattleDAO();
 
 		TopDTO topDto = btDao.topMon(floor);
-		
+
 		AscCon asc = new AscCon();
-		
 
 		String id = userDto.getID();
 		String user_name = userDto.getCHAR_NAME();
@@ -110,7 +105,7 @@ public class Battle {
 			System.out.println("당신이 찾던 것이 저 앞에 있습니다-");
 			floorCheck = false;
 		}
-		if(floorCheck) {
+		if (floorCheck) {
 			sleep();
 			System.out.println();
 			System.out.println("====== 현재 층 : " + floor + "층 =======");
@@ -125,8 +120,8 @@ public class Battle {
 			System.out.println("턴 : " + turn);
 			turn++;
 			System.out.println("[" + mon_name + "] 체력 : " + mon_now_hp + "/" + mon_hp);
-			System.out.println("당신의 이름 : " +user_name);
-			System.out.println("당신의 레벨 : " +user_level);
+			System.out.println("당신의 이름 : " + user_name);
+			System.out.println("당신의 레벨 : " + user_level);
 			System.out.println("당신의 체력 : " + user_now_hp + "/" + user_hp);
 			System.out.println("당신의 공격력 : " + user_atk + " / 당신의 방어력 : " + user_def);
 			int bonus_def = 0;
@@ -155,7 +150,7 @@ public class Battle {
 							System.out.println("상대의 시간을 느리게 만듭니다");
 							System.out.println("이번 턴에 자신의 공격 횟수가 늘어납니다");
 							sleep();
-							siwooSkill=true;
+							siwooSkill = true;
 						} else if (user_name.equals("김하윤")) {
 							System.out.println("[강철의 힘]");
 							System.out.println("육체를 강철과 같이 만듭니다");
@@ -203,7 +198,7 @@ public class Battle {
 				} else {
 					System.out.println("적이 공격을 방어했습니다!");
 				}
-				siwooSkill=false;
+				siwooSkill = false;
 			}
 			System.out.println(user_name + "의 공격!");
 			int basicAtk = random(user_atk);
@@ -237,8 +232,8 @@ public class Battle {
 			}
 			System.out.println(mon_name + "의 공격!");
 			int monster_Atk = random(mon_atk);
-			int random = (int)(Math.random()*100)+1;
-			if(!idamSkill) {
+			int random = (int) (Math.random() * 100) + 1;
+			if (!idamSkill) {
 				int user_dmg = monster_Atk - user_def - bonus_def;
 				if (user_dmg > 0) {
 					System.out.println(user_name + "이(가) " + user_dmg + "의 피해를 입었습니다!");
@@ -246,11 +241,11 @@ public class Battle {
 				} else {
 					System.out.println("적의 공격을 막아냈습니다!");
 				}
-				
-			}else {
-				if(random>20) {
+
+			} else {
+				if (random > 20) {
 					System.out.println("공격을 회피했습니다!");
-				}else {
+				} else {
 					int user_dmg = monster_Atk - user_def - bonus_def;
 					if (user_dmg > 0) {
 						System.out.println(user_name + "이(가) " + user_dmg + "의 피해를 입었습니다!");
@@ -259,7 +254,7 @@ public class Battle {
 						System.out.println("적의 공격을 막아냈습니다!");
 					}
 				}
-				idamSkill=false;
+				idamSkill = false;
 			}
 			sleep();
 			if (user_now_hp <= 0) {
@@ -268,9 +263,9 @@ public class Battle {
 				break;
 			}
 			try {
-			    Thread.sleep(1000); // 1초 지연
+				Thread.sleep(1000); // 1초 지연
 			} catch (InterruptedException e) {
-			    e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 
@@ -306,7 +301,7 @@ public class Battle {
 			System.out.println("다음 층으로 향하는 계단을 오릅니다.");
 			sleep();
 			return true;
-		} else if(!user_win && floorCheck) {
+		} else if (!user_win && floorCheck) {
 			System.out.println();
 			System.out.println("전투에 패배했습니다. 1층으로 돌아갑니다.");
 			System.out.println();
@@ -315,9 +310,9 @@ public class Battle {
 			Top_RankDTO TRdto = new Top_RankDTO(nick, user_name, floor);
 			btDao.rankUpdate(TRdto);
 			try {
-			    Thread.sleep(1000); // 1초 지연
+				Thread.sleep(1000); // 1초 지연
 			} catch (InterruptedException e) {
-			    e.printStackTrace();
+				e.printStackTrace();
 			}
 
 			return false;
@@ -330,12 +325,12 @@ public class Battle {
 	public int random(int atk) {
 		return atk + (int) (Math.random() * 10);
 	}
-	
+
 	public void sleep() {
 		try {
-		    Thread.sleep(1000); // 1초 지연
+			Thread.sleep(1000); // 1초 지연
 		} catch (InterruptedException e) {
-		    e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 }

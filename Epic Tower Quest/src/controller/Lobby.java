@@ -20,11 +20,14 @@ public class Lobby {
 		MP3Player mp3 = new MP3Player();
 		
 		// 상대경로
-		mp3.play("./로비.mp3");
+//		mp3.play("./로비.mp3");
+//		
 		
+		
+		boolean mp3Check = true;
 		
 		// 절대경로
-//		mp3.play("src/music/로비.mp3");
+
 		
 
 		if (userChar == null) {
@@ -39,6 +42,11 @@ public class Lobby {
 		System.out.println();
 
 		while (true) {
+			if (mp3.isPlaying()) {
+				
+				mp3.stop(); // 음악 멈춤 메소드 
+			}
+			mp3.play("src/music/로비.mp3");
 			System.out.println("무엇을 하시겠습니까?");
 			System.out.println("================================================");
 			System.out.println("[1]캐릭터 정보 확인 [2]강화 [3]탑을 오른다 [4]랭킹 확인 [5]탑을 나간다");
@@ -76,8 +84,12 @@ public class Lobby {
 				System.out.println("당신은 안락한 로비를 떠나 타워를 오르기로 하였습니다. ");
 				System.out.println("이제 뒤로 돌아갈 수 없습니다. ");
 //				System.out.println(" 당신에게 여신의 가호가 있기를 ");
+				mp3.stop();
+				
 				Battle battle = new Battle();
 				boolean floor = battle.floorCheck(user.getID(), user.getNICKNAME());
+				
+				
 
 				if (floor) {
 					System.out.println();
@@ -87,6 +99,11 @@ public class Lobby {
 					System.out.println();
 //				System.out.println("흐릿한 기억이 남았습니다.");
 					System.out.println("당신은 탑의 초입에 서 있습니다.");
+					mp3.play("src/music/로비.mp3");
+					if (mp3.isPlaying()) {
+						
+						mp3.stop(); // 음악 멈춤 메소드 
+					}
 				} else {
 					break;
 				}
